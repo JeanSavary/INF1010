@@ -1,60 +1,160 @@
 /********************************************
-* Titre: Travail pratique #5 - Foncteur.h
-* Date: 9 mars 2018
-* Auteur: Ryan Hardie
-*******************************************/
+ * Titre: Travail pratique #5 - Foncteur.h
+ * Date: 9 mars 2018
+ * Auteur: Ryan Hardie
+ *******************************************/
 
 #pragma once
-
+#include <map>
 // TODO : Créer le FoncteurEgal
+template<typename T>
+class FoncteurEgal{
+public:
+    FoncteurEgal()
+    {}
+    
+    FoncteurEgal(T* t): t_(t)
+    {}
+    
+    bool operator()(pair<int,T*> &pair){
+        return t_ == pair.second;
+    }
+    
+private:
+    T* t_;
+    
+};
 
 // TODO : Créer le FoncteurGenerateurId
 /*
-Attributs :
-- id_;
-Méthodes :
-- operator(); Incrémenter id_ à chaque appel
-*/
+ Attributs :
+ - id_;
+ Méthodes :
+ - operator(); Incrémenter id_ à chaque appel
+ */
+
+class FoncteurGenerateurId{
+public:
+    FoncteurGenerateurId()
+    {
+        id_=0;
+    }
+    
+    void operator() ()
+    {
+        id_++;
+    }
+    
+    
+private:
+    int id_;
+    
+};
+
 
 // TODO : Créer le FoncteurDiminuerPourcent
 /*
-Attributs :
-- pourcentage_;
-Méthodes :
-- operator(); Calule le nouveau prix du Produit de la pair passé en paramètre et le modifie
-*/
+ Attributs :
+ - pourcentage_;
+ Méthodes :
+ - operator(); Calule le nouveau prix du Produit de la pair passé en paramètre et le modifie
+ */
+
+class FoncteurDiminuerPourcent{
+public:
+    FoncteurDiminuerPourcent(int pourcentage):pourcentage_(pourcentage)
+    {}
+    
+    void operator() (pair<int,Produit*> &pair){
+        if(typeid(pair.second) == typeid(ProduitSolde)) {}
+        else pair.second->modifierPrix(pair.second-> obtenirPrix()*((100-pourcentage_)/100.0));
+    }
+    
+private:
+    int pourcentage_;
+};
+
 
 // TODO : Créer le FoncteurIntervalle
 /*
-Attributs :
-- borneInf_;
-- borneSup_;
-Méthodes :
-- operator(); Vérifie que le Produit associé à la pair passé en paramètre est compris entre les bornes borneInf_ et borneSup_ (retourne un booléen)
-*/
+ Attributs :
+ - borneInf_;
+ - borneSup_;
+ Méthodes :
+ - operator(); Vérifie que le Produit associé à la pair passé en paramètre est compris entre les bornes borneInf_ et borneSup_ (retourne un booléen)
+ */
+class FoncteurIntervalle{
+public:
+    FoncteurIntervalle(double borneInf,double borneSup):borneInf_(borneInf),borneSup_(borneSup)
+    {}
+    
+    bool operator() (pair<int,Produit*> &pair){
+        if(pair.second->obtenirPrix()>=borneInf_ && pair.second->obtenirPrix()<=borneSup_)
+        {
+            return true;
+        }
+        else return false;
+    }
+    
+private:
+    double borneInf_;
+    double borneSup_;
+};
 
 // TODO : Créer le Foncteur AjouterProduit
 /*
-Attributs :
-- &multimap_;
-Méthodes :
-- operator(); Ajoute dans la multimap la pair passé par paramètre et retourne la multimap_;
-*/
+ Attributs :
+ - &multimap_;
+ Méthodes :
+ - operator(); Ajoute dans la multimap la pair passé par paramètre et retourne la multimap_;
+ */
+class FoncteurAjouterProduit{
+public:
+    FoncteurAjouterProduit(multimap<int, Produit*>& multimap): multimap_(multimap)
+    {}
+    
+    
+    
+    
+    
+private:
+    multimap<int, Produit*> multimap_;
+    
+};
+
 
 // TODO : Créer le Foncteur SupprimerProduit
 /*
-Attributs :
-- &multimap_;
-Méthodes :
-- operator(); Utilise la fonction find_if avec le FoncteurEgal. Si le Produit existe,
-				on supprime le Produit et on retourne la multimap_,
-				sinon on retourne juste la multimap_ sans supprimer l'élément.
-*/
+ Attributs :
+ - &multimap_;
+ Méthodes :
+ - operator(); Utilise la fonction find_if avec le FoncteurEgal. Si le Produit existe,
+ on supprime le Produit et on retourne la multimap_,
+ sinon on retourne juste la multimap_ sans supprimer l'élément.
+ */
+class FoncteurSupprimerProduit{
+public:
+    
+private:
+    
+    
+};
 
 //TODO : Créer le Foncteur AjouterUsager
 /*
-Attributs :
-- &set;
-Méthodes :
-- operateur(); Trouve l'Usager dans le set_, s'il existe on le supprime et on retourne le set_, sinon on retourne juste directement le set_.
-*/
+ Attributs :
+ - &set;
+ Méthodes :
+ - operateur(); Trouve l'Usager dans le set_, s'il existe on le supprime et on retourne le set_, sinon on retourne juste directement le set_.
+ */
+class FoncteurAjouterUsager{
+public:
+    
+private:
+    
+    
+};
+
+
+
+
