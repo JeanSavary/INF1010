@@ -171,13 +171,8 @@ private:
 /*
  Attributs :
  - &set;
-<<<<<<< HEAD
- M�thodes :
- - operateur(); Trouve l'Usager dans le set_, s'il existe on le supprime et on retourne le set_, sinon on retourne juste directement le set_.
-=======
  M�thodes :
  - operateur(); prend en parametres un pointeur d'Usager et retourne le set par reference avec l'Usager ajoute.
->>>>>>> a77d80da049038322159db15448dc87cdaaa8754
  */
 class FoncteurAjouterUsager{
 public:

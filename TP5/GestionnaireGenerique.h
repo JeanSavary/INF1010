@@ -18,23 +18,18 @@ class GestionnaireGenerique {
 
         ajouter(T* element)
         {
-            A(element);
+            A(conteneur_)(element);
         }
 
         supprimer(T* element)
         {
-            C.S;
+            S(conteneur_)(element);
         }
 
 
     protected:
 
         C conteneur_;
-
-    private:
-
-        A foncteurAjout_;
-        S foncteurSuppression;
 
 };
 // TODO : Cr�er la classe GestionnaireGenerique
