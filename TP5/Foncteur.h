@@ -115,27 +115,8 @@ public:
     {}
     
     multimap<int, Produit*>& operator() (Produit* produit){
-        int valeurInt=0;
-        int tmp=0;
-        for(multimap<int, Produit*>::iterator it = multimap_.begin(); it != multimap_.end(); it++)
-        {
-            if(it->second != produit)
-            {
-                tmp = it->first;
-                if(valeurInt<tmp)
-                {
-                    valeurInt=tmp;
-                }
-            }
-            
-            else
-            {
-                valeurInt = it->first;
-                break;
-            }
-        }
         
-        multimap_.insert(pair<int, Produit*>(valeurInt,produit));
+        multimap_.insert(pair<int, Produit*>(produit->obtenirReference(),produit));
         
         return multimap_;
     }
@@ -227,6 +208,5 @@ private:
     set<Usager*> set_;
     
 };
-
 
 
