@@ -6,55 +6,86 @@
 
 #pragma once
 
-// TODO : Créer le FoncteurEgal
+#include <Usager.h>
+#include <Produit.h>
+#include <map>
+#include <set>
+#include <utility>
 
-// TODO : Créer le FoncteurGenerateurId
+using namespace std;
+
+template<typename T>
+// TODO : Crï¿½er le FoncteurEgal
+class FoncteurEgal 
+{
+	public:
+
+		FoncteurEgal(T* t) : t_(t) 
+		{
+
+		};
+
+		bool operator()(pair<int,T* t>) 
+		{
+			if (*t_ == *t)
+				return true;
+			else 
+				return false;
+		};
+
+	private:
+		T* t_;
+}
+
+
+
+// TODO : Crï¿½er le FoncteurGenerateurId
 /*
 Attributs :
 - id_;
-Méthodes :
-- operator(); Incrémenter id_ à chaque appel
+Mï¿½thodes :
+- operator(); Incrï¿½menter id_ ï¿½ chaque appel
 */
 
-// TODO : Créer le FoncteurDiminuerPourcent
+// TODO : Crï¿½er le FoncteurDiminuerPourcent
 /*
 Attributs :
 - pourcentage_;
-Méthodes :
-- operator(); Calule le nouveau prix du Produit de la pair passé en paramètre et le modifie
+Mï¿½thodes :
+- operator(); Calule le nouveau prix du Produit de la pair passï¿½ en paramï¿½tre et le modifie
 */
 
-// TODO : Créer le FoncteurIntervalle
+// TODO : Crï¿½er le FoncteurIntervalle
 /*
 Attributs :
 - borneInf_;
 - borneSup_;
-Méthodes :
-- operator(); Vérifie que le Produit associé à la pair passé en paramètre est compris entre les bornes borneInf_ et borneSup_ (retourne un booléen)
+Mï¿½thodes :
+- operator(); Vï¿½rifie que le Produit associï¿½ ï¿½ la pair passï¿½ en paramï¿½tre est compris entre les bornes borneInf_ et borneSup_ (retourne un boolï¿½en)
 */
 
-// TODO : Créer le Foncteur AjouterProduit
+// TODO : Crï¿½er le Foncteur AjouterProduit
 /*
 Attributs :
 - &multimap_;
-Méthodes :
-- operator(); Ajoute dans la multimap la pair passé par paramètre et retourne la multimap_;
+Mï¿½thodes :
+- operator(); Ajoute dans la multimap la pair passï¿½ par paramï¿½tre et retourne la multimap_;
 */
 
-// TODO : Créer le Foncteur SupprimerProduit
+// TODO : Crï¿½er le Foncteur SupprimerProduit
 /*
 Attributs :
 - &multimap_;
-Méthodes :
+Mï¿½thodes :
 - operator(); Utilise la fonction find_if avec le FoncteurEgal. Si le Produit existe,
 				on supprime le Produit et on retourne la multimap_,
-				sinon on retourne juste la multimap_ sans supprimer l'élément.
+				sinon on retourne juste la multimap_ sans supprimer l'ï¿½lï¿½ment.
 */
 
-//TODO : Créer le Foncteur AjouterUsager
+//TODO : Crï¿½er le Foncteur AjouterUsager
 /*
 Attributs :
 - &set;
-Méthodes :
+Mï¿½thodes :
 - operateur(); Trouve l'Usager dans le set_, s'il existe on le supprime et on retourne le set_, sinon on retourne juste directement le set_.
 */
