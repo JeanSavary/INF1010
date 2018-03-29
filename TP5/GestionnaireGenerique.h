@@ -6,9 +6,40 @@
 
 #pragma once
 
-// TODO : Créer la classe GestionnaireGenerique
+template <typename T, typename C, typename A, typename S>
+class GestionnaireGenerique {
 
-// TODO : Méthodes :
+    public:
+
+        obtenirConteneur() 
+        {
+            return conteneur_;
+        }
+
+        ajouter(T* element)
+        {
+            A(element);
+        }
+
+        supprimer(T* element)
+        {
+            C.S;
+        }
+
+
+    protected:
+
+        C conteneur_;
+
+    private:
+
+        A foncteurAjout_;
+        S foncteurSuppression;
+
+};
+// TODO : Crï¿½er la classe GestionnaireGenerique
+
+// TODO : Mï¿½thodes :
 /*
 - ajouter()
 - supprime()
