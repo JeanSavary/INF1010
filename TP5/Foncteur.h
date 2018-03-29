@@ -152,7 +152,10 @@ public:
     
     multimap<int, Produit*>& operator() (Produit* produit)
     {
-        
+        multimap<int, Produit*>::iterator it= find_if(multimap_.begin(),multimap_.end(),FoncteurEgal<Produit*>(&produit));
+        if((it->second) != nullptr){
+            multimap_.erase(it);
+        }
         
         return multimap_;
     }
