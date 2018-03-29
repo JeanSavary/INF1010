@@ -6,6 +6,7 @@
 
 #pragma once
 #include <map>
+#include <set>
 // TODO : Cr�er le FoncteurEgal
 template<typename T>
 class FoncteurEgal{
@@ -170,17 +171,58 @@ private:
 /*
  Attributs :
  - &set;
+<<<<<<< HEAD
  M�thodes :
  - operateur(); Trouve l'Usager dans le set_, s'il existe on le supprime et on retourne le set_, sinon on retourne juste directement le set_.
+=======
+ M�thodes :
+ - operateur(); prend en parametres un pointeur d'Usager et retourne le set par reference avec l'Usager ajoute.
+>>>>>>> a77d80da049038322159db15448dc87cdaaa8754
  */
 class FoncteurAjouterUsager{
 public:
+    FoncteurAjouterUsager(set<Usager*>& set):set_(set)
+    {}
+    
+    set<Usager*>& operator() (Usager* usager)
+    {
+        pair<set<Usager*>::iterator, bool> ajout;
+        ajout=set_.insert(usager);
+        return set_;
+    }
     
 private:
-    
+    set<Usager*> set_;
     
 };
 
+//TODO : Cr�er le Foncteur SupprimerUsager
+/*
+ Attributs :
+ - &set;
+ M�thodes :
+ - operateur(); Trouve l'Usager dans le set_, s'il existe on le supprime et on retourne le set_, sinon on retourne juste directement le set_.
+ */
+class FoncteurSupprimerUsager{
+public:
+    FoncteurSupprimerUsager(set<Usager*>& set):set_(set)
+    {}
+    
+    set<Usager*>& operator() (Usager* usager)
+    {
+        set<Usager*>::iterator it;
+        it = set_.find(usager);
+        if((*it) != nullptr){
+            set_.erase(it);
+        }
+        
+        return set_;
+    }
+    
+private:
+    set<Usager*> set_;
+    
+};
 
 
 >>>>>>> bc6dd71b601e8c1e13dcdb0eaea6f44aae185c82
