@@ -113,9 +113,22 @@ public:
     FoncteurAjouterProduit(multimap<int, Produit*>& multimap): multimap_(multimap)
     {}
     
-    
-    
-    
+    multimap<int, Produit*>& operator() (Produit* produit){
+        int valeurInt;
+        for(multimap<int, Produit*>::iterator it = multimap_.begin(); it != multimap_.end(); it++)
+        {
+            if(it->second == produit)
+            {
+                valeurInt = it->first;
+            }
+            
+            else valeurInt = it-> first + 1;
+        }
+        
+        multimap_.insert(pair<int, Produit*>(valeurInt,produit));
+        
+        return multimap_;
+    }
     
 private:
     multimap<int, Produit*> multimap_;
@@ -134,8 +147,18 @@ private:
  */
 class FoncteurSupprimerProduit{
 public:
+    FoncteurSupprimerProduit(multimap<int, Produit*>& multimap): multimap_(multimap)
+    {}
+    
+    multimap<int, Produit*>& operator() (Produit* produit)
+    {
+        
+        
+        return multimap_;
+    }
     
 private:
+    multimap<int, Produit*> multimap_;
     
     
 };
@@ -154,7 +177,6 @@ private:
     
     
 };
-
 
 
 
