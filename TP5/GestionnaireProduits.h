@@ -5,12 +5,29 @@
 *******************************************/
 
 #pragma once
-
+#include <map>
 #include "GestionnaireGenerique.h"
+#include "Foncteur.h"
+#include "Produit.h"
 
-// TODO : Créer la classe GestionnaireProduits
+template <typename Produit*, typename multimap<int, Produit*>, typename FoncteurAjouterProduit() , typename FoncteurSupprimerProduit()>
+class GestionnaireProduits : public GestionnaireGenerique
+{
+    public:
 
-// TODO : Méthodes :
+        GestionnaireProduits(); //initialisation du conteneur
+        void reinitialiserClient();
+        void reinitialiserFournisseur();
+        void afficher() const;
+        double obtenirTotalAPayer() const;
+        double obtenirTotalAPayerPremium() const;
+
+
+
+};
+// TODO : Crï¿½er la classe GestionnaireProduits
+
+// TODO : Mï¿½thodes :
 /*
 - reinitialiserClient();
 - reinitialiserFournisseur();

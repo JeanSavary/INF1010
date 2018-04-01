@@ -26,18 +26,17 @@ class GestionnaireGenerique {
             S(conteneur_)(element);
         }
 
+        // template <typename Predicate>
+        pourChaqueElement(A foncteur)
+        {
+            for_each(conteneur_::begin(), conteneur_::end(),A(conteneur_)());
+        }
+
 
     protected:
 
         C conteneur_;
 
 };
-// TODO : Cr�er la classe GestionnaireGenerique
 
-// TODO : M�thodes :
-/*
-- ajouter()
-- supprime()
-- obtenirConteneur()
-- pourChaqueElement()
-*/
+

@@ -8,11 +8,20 @@
 
 #include "GestionnaireGenerique.h"
 
-// TODO : Créer la classe GestionnaireUsager
+template <typename Usager*, typename set<Usager*>, typename FoncteurAjoutUsager, typename FoncteurSuppressionUsager>
+class GestionnaireUsager : public GestionnaireGenerique 
+{
+    public:
+        GestionnaireUsager();
 
-// TODO : La classe ressemble beaucoup à la classe Gestionnaire
+
+
+}
+// TODO : Crï¿½er la classe GestionnaireUsager
+
+// TODO : La classe ressemble beaucoup ï¿½ la classe Gestionnaire
 /*
-Les méthodes retrouvées de la classe Gestionnaire sont :
+Les mï¿½thodes retrouvï¿½es de la classe Gestionnaire sont :
 - double obtenirChiffreAffaires() const;
 - void encherir(Client *client, ProduitAuxEncheres *produit, double montant) const;
 - void reinitialiser();
