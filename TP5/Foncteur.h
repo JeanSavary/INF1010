@@ -7,6 +7,8 @@
 #pragma once
 #include <map>
 #include <set>
+#include "ProduitSolde.h"
+#include "Produit.h"
 // TODO : CrÈer le FoncteurEgal
 template<typename T>
 class FoncteurEgal{
@@ -91,10 +93,9 @@ public:
     
     bool operator() (pair<int,Produit*> &pair){
         if(pair.second->obtenirPrix()>=borneInf_ && pair.second->obtenirPrix()<=borneSup_)
-        {
             return true;
-        }
-        else return false;
+        else 
+            return false;
     }
     
 private:

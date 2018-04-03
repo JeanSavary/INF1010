@@ -18,18 +18,21 @@ class GestionnaireGenerique {
 
         ajouter(T* element)
         {
-            A(conteneur_)(element);
+            A<conteneur_> foncteur;
+            foncteur(element);
         }
 
         supprimer(T* element)
         {
-            S(conteneur_)(element);
+            S<conteneur_> foncteur;
+            foncteur(element);
         }
 
         // template <typename Predicate>
         pourChaqueElement(A foncteur)
         {
-            for_each(conteneur_::begin(), conteneur_::end(),A(conteneur_)());
+            A<conteneur_> foncteur;
+            for_each(conteneur_.begin(), conteneur_.end(),foncteur);
         }
 
 

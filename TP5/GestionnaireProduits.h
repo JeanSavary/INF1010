@@ -9,6 +9,7 @@
 #include "GestionnaireGenerique.h"
 #include "Foncteur.h"
 #include "Produit.h"
+#include "ProduitAuxEncheres"
 
 template <typename Produit*, typename multimap<int, Produit*>, typename FoncteurAjouterProduit() , typename FoncteurSupprimerProduit()>
 class GestionnaireProduits : public GestionnaireGenerique
