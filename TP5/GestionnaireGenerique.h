@@ -30,10 +30,9 @@ public:
         foncteur(element);
     }
     
-    // template <typename Predicate>
-    void  pourChaqueElement(A foncteur)
+    template <typename Predicate>
+    void  pourChaqueElement(Predicate foncteur)
     {
-        A<conteneur_> foncteur;
         for_each(conteneur_.begin(), conteneur_.end(),foncteur);
     }
     

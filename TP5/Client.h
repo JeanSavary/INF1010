@@ -17,7 +17,7 @@ class Client : public Usager
 
     unsigned int obtenirCodeClient() const;
 	  void modifierCodeClient(unsigned int codeClient);
-	// TODO : Modifier ses m�thodes : -------------------
+	
     GestionnaireProduits* obtenirPanier() const;
     virtual double obtenirTotalAPayer() const;
     void afficherPanier() const;
@@ -25,9 +25,7 @@ class Client : public Usager
     virtual void enleverProduit(Produit *produit);
     virtual void ajouterProduit(Produit *produit);
     virtual void reinitialiser();
-	// --------------------------------------------------
-
-	// TODO : Impl�menter cette m�thodes : 
+	 
 	  Produit* trouverProduitPlusCher() const;
   
   protected:

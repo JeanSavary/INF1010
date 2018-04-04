@@ -11,9 +11,11 @@
 #include "Foncteur.h"
 #include "Produit.h"
 #include "ProduitAuxEncheres.h"
-// TODO : Créer la classe GestionnaireProduits
+#include <vector>
 
-// TODO : Méthodes :
+// TODO : Crï¿½er la classe GestionnaireProduits
+
+// TODO : Mï¿½thodes :
 /*
 - reinitialiserClient();
 - reinitialiserFournisseur();
@@ -35,6 +37,9 @@ public:
     double obtenirTotalAPayer() const;
     double obtenirTotalAPayerPremium() const;
     
+    Produit* trouverProduitPlusCher() const;
+    vector<pair<int,Produit*>> obtenirProduitsEntre();
+    Produit* obtenirProduitSuivant();
     
     
 };

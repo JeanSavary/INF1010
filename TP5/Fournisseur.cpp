@@ -1,4 +1,5 @@
 #include "Fournisseur.h"
+#include "Foncteur.h"
 #include <iostream>
 
 Fournisseur::Fournisseur()
@@ -41,4 +42,15 @@ void Fournisseur::ajouterProduit(Produit *produit)
 void Fournisseur::enleverProduit(Produit *produit)
 {
 	catalogue_->supprimer(produit);
+}
+
+Produit* Fournisseur::trouverProduitPlusCher() const
+{
+    catalogue_->trouverProduitPlusCher();
+}
+
+void Fournisseur::diminuerPrix(int pourcent) const
+{
+    FoncteurDiminuerPourcent foncteur(pourcent);
+    catalogue_->pourChaqueElement(foncteur);
 }
