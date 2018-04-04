@@ -1,41 +1,41 @@
 /********************************************
-* Titre: Travail pratique #5 - GestionnaireProduits.h
-* Date: 9 mars 2018
-* Auteur: Ryan Hardie
-*******************************************/
+ * Titre: Travail pratique #5 - GestionnaireProduits.h
+ * Date: 9 mars 2018
+ * Auteur: Ryan Hardie
+ *******************************************/
 
 #pragma once
+
 #include <map>
 #include "GestionnaireGenerique.h"
 #include "Foncteur.h"
 #include "Produit.h"
-#include "ProduitAuxEncheres"
+#include "ProduitAuxEncheres.h"
+// TODO : CrÈer la classe GestionnaireProduits
 
-template <typename Produit*, typename multimap<int, Produit*>, typename FoncteurAjouterProduit() , typename FoncteurSupprimerProduit()>
-class GestionnaireProduits : public GestionnaireGenerique
-{
-    public:
-
-        GestionnaireProduits(); //initialisation du conteneur
-        void reinitialiserClient();
-        void reinitialiserFournisseur();
-        void afficher() const;
-        double obtenirTotalAPayer() const;
-        double obtenirTotalAPayerPremium() const;
-
-
-
-};
-// TODO : Cr�er la classe GestionnaireProduits
-
-// TODO : M�thodes :
+// TODO : MÈthodes :
 /*
-- reinitialiserClient();
-- reinitialiserFournisseur();
-- afficher();
-- obtenirTotalAPayer();
-- obtenirTotalApayerPremium();
-- trouverProduitPlusCher();
-- obtenirProduitsEntre();
-- obtenirProduitSuivant();
-*/
+ - reinitialiserClient();
+ - reinitialiserFournisseur();
+ - afficher();
+ - obtenirTotalAPayer();
+ - obtenirTotalApayerPremium();
+ - trouverProduitPlusCher();
+ - obtenirProduitsEntre();
+ - obtenirProduitSuivant();
+ */
+class GestionnaireProduits: public GestionnaireGenerique<Produit, multimap<int, Produit* >, FoncteurAjouterProduit, FoncteurSupprimerProduit>
+{
+public:
+    
+    GestionnaireProduits(); //initialisation du conteneur
+    void reinitialiserClient();
+    void reinitialiserFournisseur();
+    void afficher() const;
+    double obtenirTotalAPayer() const;
+    double obtenirTotalAPayerPremium() const;
+    
+    
+    
+};
+
