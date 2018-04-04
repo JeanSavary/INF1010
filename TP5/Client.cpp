@@ -10,9 +10,9 @@ Client::Client(unsigned int codeClient)
 }
 
 Client::Client(const string &nom, const string &prenom, int identifiant,
-               const string &codePostal, unsigned int codeClient, GestionnaireProduits* panier)
+               const string &codePostal, unsigned int codeClient)
     : Usager(nom, prenom, identifiant, codePostal),
-      codeClient_(codeClient),panier_(panier)
+      codeClient_(codeClient),panier_(new GestionnaireProduits())
 {
 
 }

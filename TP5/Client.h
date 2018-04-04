@@ -13,7 +13,7 @@ class Client : public Usager
 {
   public:
     Client(unsigned int codeClient = 0);
-    Client(const string &nom, const string &prenom, int identifiant, const string &codePostal, unsigned int codeClient = 0, GestionnaireProduits* panier);
+    Client(const string &nom, const string &prenom, int identifiant, const string &codePostal, unsigned int codeClient = 0);
 
     unsigned int obtenirCodeClient() const;
 	  void modifierCodeClient(unsigned int codeClient);
