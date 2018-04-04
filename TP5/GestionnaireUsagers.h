@@ -10,9 +10,7 @@
 #include "Foncteur.h"
 #include "Client.h"
 #include "ProduitAuxEncheres.h"
-// TODO : CrÈer la classe GestionnaireUsager
 
-// TODO : La classe ressemble beaucoup ‡ la classe Gestionnaire
 /*
  Les mÈthodes retrouvÈes de la classe Gestionnaire sont :
  - double obtenirChiffreAffaires() const;
@@ -30,6 +28,5 @@ public:
     void encherir(Client *client, ProduitAuxEncheres *produit, double montant) const;
     void reinitialiser();
     void afficherLesProfils() const;
-private:
-    
+
 };

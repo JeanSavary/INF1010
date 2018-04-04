@@ -35,7 +35,5 @@ public:
     double obtenirTotalAPayer() const;
     double obtenirTotalAPayerPremium() const;
     
-    
-    
 };
 

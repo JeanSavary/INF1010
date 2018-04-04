@@ -8,7 +8,9 @@
 
 
 GestionnaireProduits::GestionnaireProduits()
-{}
+{
+    multimap<int,Produit*> conteneur_ ;
+}
 
 void GestionnaireProduits::reinitialiserClient()
 {
