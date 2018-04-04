@@ -24,7 +24,7 @@
 - obtenirProduitsEntre();
 - obtenirProduitSuivant();
 */
-class GestionnaireProduits: public GestionnaireGenerique<Produit, multimap<int, Produit* >, FoncteurAjouterProduit, FoncteurSupprimerProduit>
+class GestionnaireProduits: public GestionnaireGenerique<Produit, multimap<int, Produit*>, FoncteurAjouterProduit, FoncteurSupprimerProduit>
 {
 public:
     
