@@ -14,7 +14,7 @@ class Fournisseur : public Usager
     Fournisseur();
     Fournisseur(const string &nom, const string &prenom, int identifiant, const string &codePostal);
 
-	// TODO : Modifier l'implï¿½mentation de ses mï¿½thodes : ----
+	// TODO : Modifier l'implémentation de ses méthodes : ----
     vector<Produit *> obtenirCatalogue() const;
     void afficherCatalogue() const;
     virtual void afficher() const;
@@ -23,12 +23,12 @@ class Fournisseur : public Usager
     virtual void enleverProduit(Produit *produit);   
 	// -------------------------------------------------------
 
-	// TODO : implï¿½menter les mï¿½thodes suivantes :
+	// TODO : implémenter les méthodes suivantes :
 	Produit* trouverProduitPlusCher() const;
 	void DiminuerPrix(int pourcent) const;
 
   private:
-    GestionnaireProduits* catalogue_;
+ GestionnaireProduits* catalogue_;
 };
 
 #endif

@@ -5,11 +5,11 @@ vector<Usager *> Gestionnaire::obtenirUsagers() const
     return usagers_;
 }
 
-void Gestionnaire::afficherLesProfils() const
+void Gestionnaire::afficherProfils() const
 {
     cout << "PROFILS" << endl;
     for (unsigned int i = 0; i < usagers_.size(); i++)
-        usagers_[i]->afficherProfil();
+        usagers_[i]->afficher();
     cout << endl;
 }
 

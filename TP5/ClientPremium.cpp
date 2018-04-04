@@ -32,7 +32,7 @@ double ClientPremium::obtenirTotalAPayer() const
 
 void ClientPremium::afficherProfil() const
 {
-    Client::afficherProfil();
+    Client::afficher();
     cout << "\t\tjours restants:\t" << joursRestants_ << endl;
 }
 

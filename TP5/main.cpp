@@ -16,28 +16,28 @@ using namespace std;
 
 int main()
 {
-	FoncteurGenerateurId genIdUsager, genIdProduit;
+    FoncteurGenerateurId genIdUsager, genIdProduit;
     GestionnaireUsagers poly;
     Client ratus;
-	ratus.modifierReference(genIdUsager());
+    ratus.modifierReference(genIdUsager());
     Client gaspard("Donada--Vidal", "Gaspard", genIdUsager(), "P4R 1I5", 1997);
     Client rick("S", "Rick", genIdUsager(), "HF1 8H3", 20012003);
     ClientPremium marou;
-	marou.modifierReference(genIdUsager());
+    marou.modifierReference(genIdUsager());
     ClientPremium julie("Cash", "Julie", genIdUsager(), "HZ9 1J4", 19141918, 50);
     Fournisseur mina;
-	mina.modifierReference(genIdUsager());
+    mina.modifierReference(genIdUsager());
     Fournisseur martine("Bellaiche", "Martine", genIdUsager(), "H4C 8D4");
     Fournisseur samuel("Kadoury", "Samuel", genIdUsager(), "H1G 2G4");
     Produit sel;
-	sel.modifierReference(genIdProduit());
+    sel.modifierReference(genIdProduit());
     Produit chaussures(&martine, "chaussures", genIdProduit(), 40.0);
     Produit stylo(&samuel, "stylo", genIdProduit(), 3.0);
     ProduitAuxEncheres sculpture;
-	sculpture.modifierReference(genIdProduit());
+    sculpture.modifierReference(genIdProduit());
     ProduitAuxEncheres violoncelle(&martine, "violoncelle", genIdProduit(), 5000.0);
     ProduitSolde saladier;
-	saladier.modifierReference(genIdProduit());
+    saladier.modifierReference(genIdProduit());
     ProduitSolde montre(&mina, "montre", genIdProduit(), 100.0, 30);
     ProduitSolde nem(&samuel, "nem crevettes", genIdProduit(), 2.0);
     poly.ajouter(&gaspard);
@@ -48,9 +48,9 @@ int main()
     poly.ajouter(&marou);
     poly.ajouter(&mina);
     poly.ajouter(&julie);
-
+    
     vector<bool> tests;
-
+    
     // TEST 01 : le constructeur par défaut de client doit fonctionner
     tests.push_back(ratus.obtenirNom() == "Doe" &&
                     ratus.obtenirPrenom() == "John" &&
@@ -121,16 +121,16 @@ int main()
                     nem.obtenirFournisseur() == &samuel &&
                     nem.obtenirPrix() == 2 &&
                     nem.obtenirPourcentageRabais() == 0);
-
+    
     // TEST 13 : une surenchère doit être strictement supérieure à l'offre précédente
     poly.encherir(&julie, &violoncelle, 5000.0);
     tests.push_back(julie.obtenirPanier()->obtenirConteneur().size() == 0);
     poly.encherir(&gaspard, &violoncelle, 6000.0);
     poly.encherir(&julie, &violoncelle, 6000.0);
-	// TEST 14
+    // TEST 14
     tests.push_back(julie.obtenirPanier()->obtenirConteneur().size() == 0);
     poly.encherir(&julie, &violoncelle, 7000.0);
-	// TEST 15
+    // TEST 15
     tests.push_back(julie.obtenirPanier()->obtenirConteneur().size() == 1);
     // TEST 16 : on ne peut pas surencherir sur sa propre enchère
     poly.encherir(&julie, &violoncelle, 8000.0);
@@ -149,7 +149,7 @@ int main()
     tests.push_back(violoncelle.obtenirPrix() == 9000.0);
     // TEST 21 : le prix initial ne doit pas varier
     tests.push_back(violoncelle.obtenirPrixInitial() == 5000.0);
-
+    
     // TEST 22 : ajouter le produit au client doit l'ajouter au panier
     gaspard.ajouterProduit(&stylo); // produit normal
     gaspard.ajouterProduit(&nem);   // produit soldé
@@ -166,25 +166,25 @@ int main()
     gaspard.ajouterProduit(&stylo); // produit normal
     gaspard.ajouterProduit(&nem);   // produit soldé
     tests.push_back(gaspard.obtenirPanier()->obtenirConteneur().size() == 4);
-
-	// TEST 25 : enlever un produit doit mettre à jour l'attribut du client
-	gaspard.enleverProduit(&stylo);
-	tests.push_back(gaspard.obtenirPanier()->obtenirConteneur().size() == 3);
-
-	// TEST 26 : enlever un produit un deuxième fois doit aussi mettre à jour l'attribu du client
-	gaspard.enleverProduit(&stylo);
-	tests.push_back(gaspard.obtenirPanier()->obtenirConteneur().size() == 2);
-
+    
+    // TEST 25 : enlever un produit doit mettre à jour l'attribut du client
+    gaspard.enleverProduit(&stylo);
+    tests.push_back(gaspard.obtenirPanier()->obtenirConteneur().size() == 3);
+    
+    // TEST 26 : enlever un produit un deuxième fois doit aussi mettre à jour l'attribu du client
+    gaspard.enleverProduit(&stylo);
+    tests.push_back(gaspard.obtenirPanier()->obtenirConteneur().size() == 2);
+    
     // TEST 27 : idem pour client premium
     julie.ajouterProduit(&stylo); // produit normal
     julie.ajouterProduit(&nem);   // produit soldé
     tests.push_back(julie.obtenirPanier()->obtenirConteneur().size() == 5);
-
+    
     // TEST 28 : ajouter le produit au fournisseur doit l'ajouter au catalogue
     tests.push_back(martine.obtenirCatalogue()->obtenirConteneur().size() == 2 &&
                     martine.obtenirCatalogue()->obtenirConteneur().find(chaussures.obtenirReference())->second->obtenirNom() == "chaussures" && // normal
                     martine.obtenirCatalogue()->obtenirConteneur().find(violoncelle.obtenirReference())->second->obtenirNom() == "violoncelle"); // enchères
-	// TEST 29
+    // TEST 29
     tests.push_back(mina.obtenirCatalogue()->obtenirConteneur().size() == 1 &&
                     mina.obtenirCatalogue()->obtenirConteneur().find(montre.obtenirReference())->second->obtenirNom() == "montre"); // soldé
     // TEST 30 : modifier le fournisseur d'un produit doit ajouter le produit au nouveau fournisseur
@@ -207,7 +207,7 @@ int main()
     tests.push_back(martine.obtenirCatalogue()->obtenirConteneur().size() == 2 &&
                     martine.obtenirCatalogue()->obtenirConteneur().find(chaussures.obtenirReference())->second->obtenirNom() == "chaussures" &&
                     martine.obtenirCatalogue()->obtenirConteneur().find(violoncelle.obtenirReference())->second->obtenirNom() == "violoncelle");
-
+    
     // TEST 35 : réinitialiser doit vider le panier de tous les clients
     poly.reinitialiser();
     tests.push_back(gaspard.obtenirPanier()->obtenirConteneur().size() == 0 &&
@@ -227,7 +227,7 @@ int main()
     tests.push_back(stylo.obtenirFournisseur() == nullptr &&
                     sculpture.obtenirFournisseur() == nullptr &&
                     nem.obtenirFournisseur() == nullptr);
-
+    
     // TEST 40 : le chiffre d'affaires devrait être nul après une réinitialisation
     tests.push_back(poly.obtenirChiffreAffaires() == 0.0);
     // TEST 41 : le total à payer des clients normaux doit sommer les prix dans le panier
@@ -255,36 +255,36 @@ int main()
     // TEST 47 : un usager ne peut pas être ajouté deux fois au gestionnaire
     tests.push_back(poly.obtenirConteneur().size() == 8);
     poly.ajouter(&martine);
-	// TEST 48 :
+    // TEST 48 :
     tests.push_back(poly.obtenirConteneur().size() == 8);
-
-	// TEST 49 : trouver le produit le plus chère doit fonctionner selon les test suivants
-	tests.push_back(gaspard.trouverProduitPlusCher()->obtenirReference() == 6 &&
-					samuel.trouverProduitPlusCher()->obtenirReference() == 6 &&
-					ratus.trouverProduitPlusCher() == nullptr);
-
-	// TEST 50 : diminuer le prix des produits doit mettre a jour tous les produits du fournisseur
-	samuel.DiminuerPrix(10);
-	//cout << samuel.obtenirCatalogue()->obtenirConteneur().find(6)->second->obtenirPrix() << endl;
-	tests.push_back(samuel.obtenirCatalogue()->obtenirConteneur().find(6)->second->obtenirPrix() == 63.0 &&
-					samuel.obtenirCatalogue()->obtenirConteneur().find(6)->second->Produit::obtenirPrix() == 90.0 &&
-					samuel.obtenirCatalogue()->obtenirConteneur().find(1)->second->obtenirPrix() == 36);
-
-	// TEST 51 : obtenir un vector avec des produit qui ont des prix comprix entre 200 et 2000
-	vector<pair<int, Produit*>> intervalleProduit = julie.obtenirPanier()->obtenirProduitsEntre(20, 2000);
-	/*for (int i = 0; i < intervalleProduit.size(); i++) {
-		cout << "asdfljshfgkjsh" << endl;
-		intervalleProduit[i].second->afficher();
-	}*/
-	tests.push_back(intervalleProduit.size() == 2 &&
-		intervalleProduit[0].second->obtenirPrix() >= 20.0 &&
-		intervalleProduit[intervalleProduit.size() - 1].second->obtenirPrix() <= 2000.0);
-
-	// TEST 52 : obtenir un produit avec un prix inférieur ou égal à 200
-	tests.push_back(julie.obtenirPanier()->obtenirProduitSuivant(&montre)->obtenirNom() == "nem crevettes" &&
-					julie.obtenirPanier()->obtenirProduitSuivant(&montre)->obtenirReference() > 6 &&
-					julie.obtenirPanier()->obtenirProduitSuivant(&montre) == &nem);
-
+    
+    // TEST 49 : trouver le produit le plus chère doit fonctionner selon les test suivants
+    tests.push_back(gaspard.trouverProduitPlusCher()->obtenirReference() == 6 &&
+                    samuel.trouverProduitPlusCher()->obtenirReference() == 6 &&
+                    ratus.trouverProduitPlusCher() == nullptr);
+    
+    // TEST 50 : diminuer le prix des produits doit mettre a jour tous les produits du fournisseur
+    samuel.DiminuerPrix(10);
+    //cout << samuel.obtenirCatalogue()->obtenirConteneur().find(6)->second->obtenirPrix() << endl;
+    tests.push_back(samuel.obtenirCatalogue()->obtenirConteneur().find(6)->second->obtenirPrix() == 63.0 &&
+                    samuel.obtenirCatalogue()->obtenirConteneur().find(6)->second->Produit::obtenirPrix() == 90.0 &&
+                    samuel.obtenirCatalogue()->obtenirConteneur().find(1)->second->obtenirPrix() == 36);
+    
+    // TEST 51 : obtenir un vector avec des produit qui ont des prix comprix entre 200 et 2000
+    vector<pair<int, Produit*>> intervalleProduit = julie.obtenirPanier()->obtenirProduitsEntre(20, 2000);
+    /*for (int i = 0; i < intervalleProduit.size(); i++) {
+     cout << "asdfljshfgkjsh" << endl;
+     intervalleProduit[i].second->afficher();
+     }*/
+    tests.push_back(intervalleProduit.size() == 2 &&
+                    intervalleProduit[0].second->obtenirPrix() >= 20.0 &&
+                    intervalleProduit[intervalleProduit.size() - 1].second->obtenirPrix() <= 2000.0);
+    
+    // TEST 52 : obtenir un produit avec un prix inférieur ou égal à 200
+    tests.push_back(julie.obtenirPanier()->obtenirProduitSuivant(&montre)->obtenirNom() == "nem crevettes" &&
+                    julie.obtenirPanier()->obtenirProduitSuivant(&montre)->obtenirReference() > 6 &&
+                    julie.obtenirPanier()->obtenirProduitSuivant(&montre) == &nem);
+    
     // fonctions d'affichage
     gaspard.afficherPanier();
     julie.afficherPanier();
@@ -293,7 +293,7 @@ int main()
     samuel.afficherCatalogue();
     mina.afficherCatalogue();
     poly.afficherProfils();
-
+    
     cout << "TESTS" << endl;
     for (unsigned int i = 0; i < tests.size(); i++)
     {
@@ -305,3 +305,4 @@ int main()
     }
     return 0;
 }
+

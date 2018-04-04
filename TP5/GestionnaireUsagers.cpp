@@ -1,17 +1,17 @@
 /********************************************
- * Titre: Travail pratique #5 - GestionnaireUsagers.cpp
- * Date: 9 mars 2018
- * Auteur: Ryan Hardie
- *******************************************/
+* Titre: Travail pratique #5 - GestionnaireUsagers.cpp
+* Date: 9 mars 2018
+* Auteur: Ryan Hardie
+*******************************************/
 #include "GestionnaireGenerique.h"
 #include "GestionnaireUsagers.h"
 #include "Usager.h"
 #include "Client.h"
 #include "ProduitAuxEncheres.h"
 
-GestionnaireUsagers::GestionnaireUsagers(set<Usager*> conteneur)
+GestionnaireUsagers::GestionnaireUsagers()
 {
-    copy(conteneur.begin(), conteneur.end(), back_inserter(conteneur_));
+    set<Usager*> conteneur_;
 }
 
 double GestionnaireUsagers::obtenirChiffreAffaires() const
@@ -26,19 +26,19 @@ double GestionnaireUsagers::obtenirChiffreAffaires() const
 void GestionnaireUsagers::encherir(Client *client, ProduitAuxEncheres *produit, double montant) const
 {
     
-    /* if (produit->obtenirPrix() < montant)
-     produit->mettreAJourEnchere(client, montant);*/
+   /* if (produit->obtenirPrix() < montant)
+        produit->mettreAJourEnchere(client, montant);*/
     
 }
 void GestionnaireUsagers::reinitialiser()
 {
     for (Usager* usager:conteneur_) {
-        usager->reinitialiser();
+       usager->reinitialiser();
     }
 }
 void GestionnaireUsagers::afficherLesProfils() const
 {
-    cout << "PROFILS" << endl;
+   cout << "PROFILS" << endl;
     for (Usager* usager:conteneur_) {
         usager->afficher();
     }

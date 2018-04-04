@@ -9,7 +9,8 @@
 #include <set>
 #include "ProduitSolde.h"
 #include "Produit.h"
-// TODO : CrÃˆer le FoncteurEgal
+#include "Usager.h"
+// TODO : Créer le FoncteurEgal
 template<typename T>
 class FoncteurEgal{
 public:
@@ -28,12 +29,12 @@ private:
     
 };
 
-// TODO : CrÃˆer le FoncteurGenerateurId
+// TODO : Créer le FoncteurGenerateurId
 /*
  Attributs :
  - id_;
- MÃˆthodes :
- - operator(); IncrÃˆmenter id_ â€¡ chaque appel
+ Méthodes :
+ - operator(); Incrémenter id_ à chaque appel
  */
 
 class FoncteurGenerateurId{
@@ -55,12 +56,12 @@ private:
 };
 
 
-// TODO : CrÃˆer le FoncteurDiminuerPourcent
+// TODO : Créer le FoncteurDiminuerPourcent
 /*
  Attributs :
  - pourcentage_;
- MÃˆthodes :
- - operator(); Calule le nouveau prix du Produit de la pair passÃˆ en paramÃ‹tre et le modifie
+ Méthodes :
+ - operator(); Calule le nouveau prix du Produit de la pair passé en paramètre et le modifie
  */
 
 class FoncteurDiminuerPourcent{
@@ -78,13 +79,13 @@ private:
 };
 
 
-// TODO : CrÃˆer le FoncteurIntervalle
+// TODO : Créer le FoncteurIntervalle
 /*
  Attributs :
  - borneInf_;
  - borneSup_;
- MÃˆthodes :
- - operator(); VÃˆrifie que le Produit associÃˆ â€¡ la pair passÃˆ en paramÃ‹tre est compris entre les bornes borneInf_ et borneSup_ (retourne un boolÃˆen)
+ Méthodes :
+ - operator(); Vérifie que le Produit associé à la pair passé en paramètre est compris entre les bornes borneInf_ et borneSup_ (retourne un booléen)
  */
 class FoncteurIntervalle{
 public:
@@ -94,7 +95,7 @@ public:
     bool operator() (pair<int,Produit*> &pair){
         if(pair.second->obtenirPrix()>=borneInf_ && pair.second->obtenirPrix()<=borneSup_)
             return true;
-        else 
+        else
             return false;
     }
     
@@ -103,12 +104,12 @@ private:
     double borneSup_;
 };
 
-// TODO : CrÃˆer le Foncteur AjouterProduit
+// TODO : Créer le Foncteur AjouterProduit
 /*
  Attributs :
  - &multimap_;
- MÃˆthodes :
- - operator(); Ajoute dans la multimap la pair passÃˆ par paramÃ‹tre et retourne la multimap_;
+ Méthodes :
+ - operator(); Ajoute dans la multimap la pair passé par paramètre et retourne la multimap_;
  */
 class FoncteurAjouterProduit{
 public:
@@ -128,14 +129,14 @@ private:
 };
 
 
-// TODO : CrÃˆer le Foncteur SupprimerProduit
+// TODO : Créer le Foncteur SupprimerProduit
 /*
  Attributs :
  - &multimap_;
- MÃˆthodes :
+ Méthodes :
  - operator(); Utilise la fonction find_if avec le FoncteurEgal. Si le Produit existe,
  on supprime le Produit et on retourne la multimap_,
- sinon on retourne juste la multimap_ sans supprimer l'ÃˆlÃˆment.
+ sinon on retourne juste la multimap_ sans supprimer l'élément.
  */
 class FoncteurSupprimerProduit{
 public:
@@ -158,11 +159,11 @@ private:
     
 };
 
-//TODO : CrÃˆer le Foncteur AjouterUsager
+//TODO : Créer le Foncteur AjouterUsager
 /*
  Attributs :
  - &set;
- MÃˆthodes :
+ Méthodes :
  - operateur(); prend en parametres un pointeur d'Usager et retourne le set par reference avec l'Usager ajoute.
  */
 class FoncteurAjouterUsager{
@@ -182,11 +183,11 @@ private:
     
 };
 
-//TODO : CrÃˆer le Foncteur SupprimerUsager
+//TODO : Créer le Foncteur SupprimerUsager
 /*
  Attributs :
  - &set;
- MÃˆthodes :
+ Méthodes :
  - operateur(); Trouve l'Usager dans le set_, s'il existe on le supprime et on retourne le set_, sinon on retourne juste directement le set_.
  */
 class FoncteurSupprimerUsager{
