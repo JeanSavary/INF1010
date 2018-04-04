@@ -13,25 +13,25 @@ class GestionnaireGenerique {
     
 public:
     
-   C obtenirConteneur()
+    C obtenirConteneur()
     {
         return conteneur_;
     }
     
-   void ajouter(T* element)
+    void ajouter(T* element)
     {
         A foncteur (conteneur_) ;
         foncteur(element);
     }
     
-     void supprimer(T* element)
+    void supprimer(T* element)
     {
         S foncteur (conteneur_);
         foncteur(element);
     }
     
     // template <typename Predicate>
-  void  pourChaqueElement(A foncteur)
+    void  pourChaqueElement(A foncteur)
     {
         A<conteneur_> foncteur;
         for_each(conteneur_.begin(), conteneur_.end(),foncteur);

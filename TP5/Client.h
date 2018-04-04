@@ -5,6 +5,7 @@
 #include <vector>
 #include "Usager.h"
 #include "Produit.h"
+#include "GestionnaireProduits.h"
 
 using namespace std;
 
@@ -12,12 +13,12 @@ class Client : public Usager
 {
   public:
     Client(unsigned int codeClient = 0);
-    Client(const string &nom, const string &prenom, int identifiant, const string &codePostal, unsigned int codeClient = 0);
+    Client(const string &nom, const string &prenom, int identifiant, const string &codePostal, unsigned int codeClient = 0, GestionnaireProduits* panier);
 
     unsigned int obtenirCodeClient() const;
-	void modifierCodeClient(unsigned int codeClient);
-	// TODO : Modifier ses méthodes : -------------------
-    vector<Produit *> obtenirPanier() const;
+	  void modifierCodeClient(unsigned int codeClient);
+	// TODO : Modifier ses mï¿½thodes : -------------------
+    GestionnaireProduits* obtenirPanier() const;
     virtual double obtenirTotalAPayer() const;
     void afficherPanier() const;
     virtual void afficher() const;
@@ -26,11 +27,11 @@ class Client : public Usager
     virtual void reinitialiser();
 	// --------------------------------------------------
 
-	// TODO : Implémenter cette méthodes : 
-	Produit* trouverProduitPlusCher() const;
+	// TODO : Implï¿½menter cette mï¿½thodes : 
+	  Produit* trouverProduitPlusCher() const;
   
   protected:
-    vector<Produit *> panier_;
+    GestionnaireProduits* panier_;
 
   private:
     unsigned int codeClient_;
