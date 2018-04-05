@@ -1,45 +1,46 @@
 /********************************************
-* Titre: Travail pratique #5 - GestionnaireProduits.h
-* Date: 9 mars 2018
-* Auteur: Ryan Hardie
-*******************************************/
-
-#pragma once
-
-#include <map>
+ * Titre: Travail pratique #5 - GestionnaireUsagers.cpp
+ * Date: 9 mars 2018
+ * Auteur: Ryan Hardie
+ *******************************************/
 #include "GestionnaireGenerique.h"
-#include "Foncteur.h"
-#include "Produit.h"
+#include "GestionnaireUsagers.h"
+#include "Usager.h"
+#include "Client.h"
 #include "ProduitAuxEncheres.h"
-#include <vector>
 
-// TODO : Cr�er la classe GestionnaireProduits
-
-// TODO : M�thodes :
-/*
-- reinitialiserClient();
-- reinitialiserFournisseur();
-- afficher();
-- obtenirTotalAPayer();
-- obtenirTotalApayerPremium();
-- trouverProduitPlusCher();
-- obtenirProduitsEntre();
-- obtenirProduitSuivant();
-*/
-class GestionnaireProduits: public GestionnaireGenerique<Produit, multimap<int, Produit* >, FoncteurAjouterProduit, FoncteurSupprimerProduit>
+GestionnaireUsagers::GestionnaireUsagers()
 {
-public:
+    set<Usager*> conteneur_;
+}
+
+double GestionnaireUsagers::obtenirChiffreAffaires() const
+{
+    double chiffreAffaires = 0.0;
+    for (Usager* usager:conteneur_) {
+        chiffreAffaires+= usager->obtenirTotalAPayer();
+    }
+    return chiffreAffaires;
+}
+
+void GestionnaireUsagers::encherir(Client *client, ProduitAuxEncheres *produit, double montant) const
+{
     
-    GestionnaireProduits(); //initialisation du conteneur
-    void reinitialiserClient();
-    void reinitialiserFournisseur();
-    void afficher() const;
-    double obtenirTotalAPayer() const;
-    double obtenirTotalAPayerPremium() const;
+    if (produit->obtenirPrix() < montant)
+        produit->mettreAJourEnchere(client, montant);
     
-    Produit* trouverProduitPlusCher() const;
-    vector<pair<int,Produit*>> obtenirProduitsEntre();
-    Produit* obtenirProduitSuivant();
-    
-    
-};
+}
+void GestionnaireUsagers::reinitialiser()
+{
+    for (Usager* usager:conteneur_) {
+        usager->reinitialiser();
+    }
+}
+void GestionnaireUsagers::afficherLesProfils() const
+{
+    cout << "PROFILS" << endl;
+    for (Usager* usager:conteneur_) {
+        usager->afficher();
+    }
+    cout << endl;
+}
