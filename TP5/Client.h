@@ -11,13 +11,13 @@ using namespace std;
 
 class Client : public Usager
 {
-  public:
+public:
     Client(unsigned int codeClient = 0);
     Client(const string &nom, const string &prenom, int identifiant, const string &codePostal, unsigned int codeClient = 0);
-
+    
     unsigned int obtenirCodeClient() const;
-	  void modifierCodeClient(unsigned int codeClient);
-	
+    void modifierCodeClient(unsigned int codeClient);
+    
     GestionnaireProduits* obtenirPanier() const;
     virtual double obtenirTotalAPayer() const;
     void afficherPanier() const;
@@ -25,14 +25,15 @@ class Client : public Usager
     virtual void enleverProduit(Produit *produit);
     virtual void ajouterProduit(Produit *produit);
     virtual void reinitialiser();
-	 
-	  Produit* trouverProduitPlusCher() const;
-  
-  protected:
+    
+    Produit* trouverProduitPlusCher() const;
+    
+protected:
     GestionnaireProduits* panier_;
-
-  private:
+    
+private:
     unsigned int codeClient_;
 };
 
 #endif
+

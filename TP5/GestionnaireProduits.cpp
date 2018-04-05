@@ -1,8 +1,8 @@
 /********************************************
- * Titre: Travail pratique #5 - GestionnaireProduits.cpp
- * Date: 9 mars 2018
- * Auteur: Ryan Hardie
- *******************************************/
+* Titre: Travail pratique #5 - GestionnaireProduits.cpp
+* Date: 9 mars 2018
+* Auteur: Ryan Hardie
+*******************************************/
 
 #include "GestionnaireProduits.h"
 
@@ -17,8 +17,8 @@ void GestionnaireProduits::reinitialiserClient()
         if (produit) {
             produit->modifierEncherisseur(nullptr);
             produit->modifierPrix(produit->obtenirPrixInitial());
-        }
-        conteneur_.clear();
+    }
+    conteneur_.clear();
     }
     
 }
@@ -27,8 +27,8 @@ void GestionnaireProduits::reinitialiserFournisseur()
 {
     for (multimap<int,Produit*>::iterator it= conteneur_.begin() ; it !=conteneur_.end(); it++) {
         it->second->modifierFournisseur(nullptr);
-    }
-    conteneur_.clear();
+        }
+        conteneur_.clear();
 }
 
 void GestionnaireProduits::afficher() const
@@ -62,18 +62,18 @@ double GestionnaireProduits::obtenirTotalAPayerPremium() const
         montant += prix < 5 ? 0 : prix - 5;
     }
     return montant;
-    
+
 }
 
 Produit* GestionnaireProduits::trouverProduitPlusCher() const
 {
     using pairtype = pair<int, Produit*>;
     auto max= max_element(
-                          conteneur_.begin(),conteneur_.end(),[](const pairtype & p1,const pairtype & p2)
-                          {
-                              return p1.second->obtenirPrix() < p2.second->obtenirPrix();
-                          }
-                          );
+            conteneur_.begin(),conteneur_.end(),[](const pairtype & p1,const pairtype & p2)
+                {
+                    return p1.second->obtenirPrix() < p2.second->obtenirPrix();
+                }
+    );
     return max->second;
 }
 

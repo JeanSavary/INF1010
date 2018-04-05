@@ -26,8 +26,8 @@ double GestionnaireUsagers::obtenirChiffreAffaires() const
 void GestionnaireUsagers::encherir(Client *client, ProduitAuxEncheres *produit, double montant) const
 {
     
-   /* if (produit->obtenirPrix() < montant)
-        produit->mettreAJourEnchere(client, montant);*/
+    if (produit->obtenirPrix() < montant)
+        produit->mettreAJourEnchere(client, montant);
     
 }
 void GestionnaireUsagers::reinitialiser()

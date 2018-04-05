@@ -10,12 +10,10 @@
 #include "ProduitSolde.h"
 #include "Produit.h"
 #include "Usager.h"
-// TODO : Cr�er le FoncteurEgal
+// TODO : Creer le FoncteurEgal
 template<typename T>
 class FoncteurEgal{
 public:
-    FoncteurEgal()
-    {}
     
     FoncteurEgal(T* t): t_(t)
     {}
@@ -29,12 +27,12 @@ private:
     
 };
 
-// TODO : Cr�er le FoncteurGenerateurId
+// TODO : Creer le FoncteurGenerateurId
 /*
  Attributs :
  - id_;
- M�thodes :
- - operator(); Incr�menter id_ � chaque appel
+ Methodes :
+ - operator(); Incrementer id_ a chaque appel
  */
 
 class FoncteurGenerateurId{
@@ -56,12 +54,12 @@ private:
 };
 
 
-// TODO : Cr�er le FoncteurDiminuerPourcent
+// TODO : Creer le FoncteurDiminuerPourcent
 /*
  Attributs :
  - pourcentage_;
- M�thodes :
- - operator(); Calule le nouveau prix du Produit de la pair pass� en param�tre et le modifie
+ Methodes :
+ - operator(); Calule le nouveau prix du Produit de la pair passe en parametre et le modifie
  */
 
 class FoncteurDiminuerPourcent{
@@ -79,13 +77,13 @@ private:
 };
 
 
-// TODO : Cr�er le FoncteurIntervalle
+// TODO : Creer le FoncteurIntervalle
 /*
  Attributs :
  - borneInf_;
  - borneSup_;
- M�thodes :
- - operator(); V�rifie que le Produit associ� � la pair pass� en param�tre est compris entre les bornes borneInf_ et borneSup_ (retourne un bool�en)
+ Methodes :
+ - operator(); Verifie que le Produit associe e la pair passe en parametre est compris entre les bornes borneInf_ et borneSup_ (retourne un booleen)
  */
 class FoncteurIntervalle{
 public:
@@ -104,12 +102,12 @@ private:
     double borneSup_;
 };
 
-// TODO : Cr�er le Foncteur AjouterProduit
+// TODO : Creer le Foncteur AjouterProduit
 /*
  Attributs :
  - &multimap_;
- M�thodes :
- - operator(); Ajoute dans la multimap la pair pass� par param�tre et retourne la multimap_;
+ Methodes :
+ - operator(); Ajoute dans la multimap la pair passe par parametre et retourne la multimap_;
  */
 class FoncteurAjouterProduit{
 public:
@@ -129,14 +127,14 @@ private:
 };
 
 
-// TODO : Cr�er le Foncteur SupprimerProduit
+// TODO : Creer le Foncteur SupprimerProduit
 /*
  Attributs :
  - &multimap_;
- M�thodes :
+ Methodes :
  - operator(); Utilise la fonction find_if avec le FoncteurEgal. Si le Produit existe,
  on supprime le Produit et on retourne la multimap_,
- sinon on retourne juste la multimap_ sans supprimer l'�l�ment.
+ sinon on retourne juste la multimap_ sans supprimer l'element.
  */
 class FoncteurSupprimerProduit{
 public:
@@ -159,11 +157,11 @@ private:
     
 };
 
-//TODO : Cr�er le Foncteur AjouterUsager
+//TODO : Creer le Foncteur AjouterUsager
 /*
  Attributs :
  - &set;
- M�thodes :
+ Methodes :
  - operateur(); prend en parametres un pointeur d'Usager et retourne le set par reference avec l'Usager ajoute.
  */
 class FoncteurAjouterUsager{
@@ -183,11 +181,11 @@ private:
     
 };
 
-//TODO : Cr�er le Foncteur SupprimerUsager
+//TODO : Creer le Foncteur SupprimerUsager
 /*
  Attributs :
  - &set;
- M�thodes :
+ Methodes :
  - operateur(); Trouve l'Usager dans le set_, s'il existe on le supprime et on retourne le set_, sinon on retourne juste directement le set_.
  */
 class FoncteurSupprimerUsager{
