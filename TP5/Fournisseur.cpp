@@ -3,14 +3,16 @@
 #include <iostream>
 
 Fournisseur::Fournisseur()
-: Usager(), catalogue_(new GestionnaireProduits())
+: Usager()
 {
+    catalogue_= new GestionnaireProduits();
 }
 
 Fournisseur::Fournisseur(const string &nom, const string &prenom, int identifiant,
                          const string &codePostal)
-: Usager(nom, prenom, identifiant, codePostal), catalogue_(new GestionnaireProduits())
+: Usager(nom, prenom, identifiant, codePostal)
 {
+    catalogue_= new GestionnaireProduits();
 }
 
 GestionnaireProduits* Fournisseur::obtenirCatalogue() const

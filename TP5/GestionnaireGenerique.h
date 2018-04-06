@@ -6,7 +6,7 @@
 
 #pragma once
 
-using namespace std;
+
 
 template <typename T, typename C, typename A, typename S>
 class GestionnaireGenerique {

@@ -264,7 +264,7 @@ int main()
                     ratus.trouverProduitPlusCher() == nullptr);
     
     // TEST 50 : diminuer le prix des produits doit mettre a jour tous les produits du fournisseur
-    samuel.DiminuerPrix(10);
+    samuel.diminuerPrix(10);
     //cout << samuel.obtenirCatalogue()->obtenirConteneur().find(6)->second->obtenirPrix() << endl;
     tests.push_back(samuel.obtenirCatalogue()->obtenirConteneur().find(6)->second->obtenirPrix() == 63.0 &&
                     samuel.obtenirCatalogue()->obtenirConteneur().find(6)->second->Produit::obtenirPrix() == 90.0 &&
@@ -292,7 +292,7 @@ int main()
     martine.afficherCatalogue();
     samuel.afficherCatalogue();
     mina.afficherCatalogue();
-    poly.afficherProfils();
+    poly.afficherLesProfils();
     
     cout << "TESTS" << endl;
     for (unsigned int i = 0; i < tests.size(); i++)

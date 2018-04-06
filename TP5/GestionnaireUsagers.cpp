@@ -9,10 +9,6 @@
 #include "Client.h"
 #include "ProduitAuxEncheres.h"
 
-GestionnaireUsagers::GestionnaireUsagers()
-{
-    set<Usager*> conteneur_;
-}
 
 double GestionnaireUsagers::obtenirChiffreAffaires() const
 {

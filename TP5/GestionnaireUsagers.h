@@ -25,7 +25,7 @@ using namespace std;
 class GestionnaireUsagers : public GestionnaireGenerique<Usager, set<Usager*>, FoncteurAjouterUsager, FoncteurSupprimerUsager>
 {
     public:
-        GestionnaireUsagers();
+    
         double obtenirChiffreAffaires() const;
         void encherir(Client *client, ProduitAuxEncheres *produit, double montant) const;
         void reinitialiser();
