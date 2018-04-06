@@ -37,12 +37,12 @@ private:
 
 class FoncteurGenerateurId{
 public:
-    FoncteurGenerateurId()
-    {
-        id_=0;
-    }
+    FoncteurGenerateurId(): id_(0)
+    {}
     
-   int operator() ()
+        
+    
+   int operator()()
     {
        return id_++;
         
@@ -117,13 +117,13 @@ public:
     
     multimap<int, Produit*>& operator() (Produit* produit){
         
-        multimap_.insert(pair<int, Produit*>(produit->obtenirReference(),produit));
+        multimap_.insert(make_pair(produit->obtenirReference(),produit));
         
         return multimap_;
     }
     
 private:
-    multimap<int, Produit*> multimap_;
+    multimap<int, Produit*>& multimap_;
     
 };
 
@@ -155,7 +155,7 @@ public:
     }
     
 private:
-    multimap<int, Produit*> multimap_;
+    multimap<int, Produit*>& multimap_;
     
     
 };
@@ -180,7 +180,7 @@ public:
     }
     
 private:
-    set<Usager*> set_;
+    set<Usager*>& set_;
     
 };
 
@@ -199,8 +199,8 @@ public:
     set<Usager*>& operator() (Usager* usager)
     {
         set<Usager*>::iterator it;
-        it = set_.find(usager);
-        if((*it) != nullptr){
+        it = find(set_.begin(),set_.end(),usager);
+        if(*it != nullptr){
             set_.erase(it);
         }
         
@@ -208,7 +208,7 @@ public:
     }
     
 private:
-    set<Usager*> set_;
+    set<Usager*>& set_;
     
 };
 
