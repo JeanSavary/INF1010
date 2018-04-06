@@ -1,15 +1,18 @@
 #include "Fournisseur.h"
+#include "Foncteur.h"
 #include <iostream>
 
 Fournisseur::Fournisseur()
-    : Usager(), catalogue_(new GestionnaireProduits())
+: Usager()
 {
+    catalogue_= new GestionnaireProduits();
 }
 
 Fournisseur::Fournisseur(const string &nom, const string &prenom, int identifiant,
                          const string &codePostal)
-    : Usager(nom, prenom, identifiant, codePostal), catalogue_(new GestionnaireProduits())
+: Usager(nom, prenom, identifiant, codePostal)
 {
+    catalogue_= new GestionnaireProduits();
 }
 
 GestionnaireProduits* Fournisseur::obtenirCatalogue() const
@@ -19,26 +22,38 @@ GestionnaireProduits* Fournisseur::obtenirCatalogue() const
 
 void Fournisseur::afficherCatalogue() const
 {
-	catalogue_->afficher();
+    catalogue_->afficher();
 }
 
 void Fournisseur::afficher() const
 {
     Usager::afficher();
-    cout << "\t\tcatalogue:\t" << catalogue_->obtenirConteneur().size()<< " elements" << endl;
+    cout << "\t\tcatalogue:\t" << catalogue_->obtenirConteneur().size() << " elements" << endl;
 }
 
 void Fournisseur::reinitialiser()
 {
-	catalogue_->reinitialiserFournisseur();
+    catalogue_->reinitialiserFournisseur();
 }
 
 void Fournisseur::ajouterProduit(Produit *produit)
 {
-	catalogue_->ajouter(produit);
+    catalogue_->ajouter(produit);
 }
 
 void Fournisseur::enleverProduit(Produit *produit)
 {
-	catalogue_->supprimer(produit);
+    catalogue_->supprimer(produit);
 }
+
+Produit* Fournisseur::trouverProduitPlusCher() const
+{
+   return catalogue_->trouverProduitPlusCher();
+}
+
+void Fournisseur::diminuerPrix(int pourcent) const
+{
+    FoncteurDiminuerPourcent foncteur(pourcent);
+    catalogue_->pourChaqueElement(foncteur);
+}
+

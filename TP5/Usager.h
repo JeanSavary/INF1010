@@ -17,7 +17,7 @@ class Usager
     int obtenirReference() const;
     string obtenirCodePostal() const;
     virtual double obtenirTotalAPayer() const;
-    virtual void afficher() const; //= 0
+    virtual void afficher() const = 0;
 
     void modifierNom(const string &nom);
     void modifierPrenom(const string &prenom);
@@ -32,7 +32,6 @@ class Usager
     string prenom_;
     int reference_;
     string codePostal_;
-  
 };
 
 #endif

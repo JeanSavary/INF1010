@@ -12,7 +12,7 @@ class Gestionnaire
 {
   public:
     vector<Usager *> obtenirUsagers() const;
-    void afficherLesProfils() const;
+    void afficherProfils() const;
     double obtenirChiffreAffaires() const;
 
     void ajouterUsager(Usager *usager);

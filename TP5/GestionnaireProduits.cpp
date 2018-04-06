@@ -5,12 +5,10 @@
 *******************************************/
 
 #include "GestionnaireProduits.h"
-
+#include "ProduitAuxEncheres.h"
 
 GestionnaireProduits::GestionnaireProduits()
-{
-    multimap<int,Produit*> conteneur_ ;
-}
+{}
 
 void GestionnaireProduits::reinitialiserClient()
 {
@@ -90,9 +88,9 @@ vector<pair<int,Produit*>> GestionnaireProduits::obtenirProduitsEntre(double bor
 
 Produit* GestionnaireProduits::obtenirProduitSuivant(Produit* produit)
 {
-    multimap<int, Produit*>:: iterator it = find_if(conteneur_.begin(),conteneur_.end(),bind(FoncteurEgal<Produit>(produit)));
-    it++;
-    return it->second;
+    
+    multimap<int, Produit*>:: iterator it = find_if(conteneur_.begin(),conteneur_.end(),bind(greater<pair<int, Produit*>>(),std::placeholders::_1,make_pair(produit->obtenirReference(), produit)));
+    return (it->second);
 }
 
 

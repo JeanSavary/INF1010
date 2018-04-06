@@ -18,8 +18,8 @@ public:
     FoncteurEgal(T* t): t_(t)
     {}
     
-    bool operator()(pair<int,T*> &pair){
-        return t_ == pair.second;
+    bool operator()(pair<int,T*> pair){
+        return (t_ == pair.second);
     }
     
 private:
@@ -42,9 +42,10 @@ public:
         id_=0;
     }
     
-    void operator() ()
+   int operator() ()
     {
-        id_++;
+       return id_++;
+        
     }
     
     
@@ -67,7 +68,7 @@ public:
     FoncteurDiminuerPourcent(int pourcentage):pourcentage_(pourcentage)
     {}
     
-    void operator() (pair<int,Produit*> &pair){
+    void operator() (pair<int,Produit*> pair){
         if(typeid(pair.second) == typeid(ProduitSolde)) {}
         else pair.second->modifierPrix(pair.second-> obtenirPrix()*((100-pourcentage_)/100.0));
     }
@@ -90,10 +91,10 @@ public:
     FoncteurIntervalle(double borneInf,double borneSup):borneInf_(borneInf),borneSup_(borneSup)
     {}
     
-    bool operator() (pair<int,Produit*> &pair){
+    bool operator() (pair<int,Produit*> pair){
         if(pair.second->obtenirPrix()>=borneInf_ && pair.second->obtenirPrix()<=borneSup_)
             return true;
-        else 
+        else
             return false;
     }
     
@@ -143,9 +144,11 @@ public:
     
     multimap<int, Produit*>& operator() (Produit* produit)
     {
-        auto it= find_if(multimap_.begin(),multimap_.end(),FoncteurEgal<Produit*>(&produit));
-        if((it->second) != nullptr){
-            multimap_.erase(it);
+        FoncteurEgal<Produit> foncteur (produit);
+        auto it= find_if(multimap_.begin(),multimap_.end(),foncteur);
+        
+        if(it != multimap_.end()){
+            multimap_.erase(multimap_.find(produit->obtenirPrix()));
         }
         
         return multimap_;

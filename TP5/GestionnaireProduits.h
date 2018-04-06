@@ -3,6 +3,8 @@
  * Date: 9 mars 2018
  * Auteur: Ryan Hardie
  *******************************************/
+#ifndef GESTIONNAIREGENERIQUE_H
+#define GESTIONNAIREGENERIQUE_H
 
 #pragma once
 
@@ -42,4 +44,6 @@ public:
     
     
 };
+
+#endif
 
