@@ -37,7 +37,7 @@ public:
     double obtenirTotalAPayerPremium() const;
     
     Produit* trouverProduitPlusCher() const;
-    vector<pair<int,Produit*>> obtenirProduitsEntre(double borneInf, double borneSup);
+    vector< pair<int,Produit*> > obtenirProduitsEntre(double borneInf, double borneSup);
     Produit* obtenirProduitSuivant(Produit* produit);
     
     

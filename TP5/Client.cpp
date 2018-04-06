@@ -46,7 +46,7 @@ void Client::afficher() const
 
 void Client::modifierCodeClient(unsigned int codeClient)
 {
-    codeClient_ = codeClient_;
+    codeClient_ = codeClient;
 }
 
 void Client::enleverProduit(Produit *produit)
