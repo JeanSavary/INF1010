@@ -113,7 +113,9 @@ private:
 class FoncteurAjouterProduit{
 public:
     FoncteurAjouterProduit(multimap<int, Produit*>& multimap): multimap_(multimap)
-    {}
+    {
+        
+    }
     
     multimap<int, Produit*>& operator() (Produit* produit){
         
