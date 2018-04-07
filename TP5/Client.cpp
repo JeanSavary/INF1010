@@ -61,7 +61,10 @@ void Client::ajouterProduit(Produit *produit)
 
 void Client::reinitialiser()
 {
-	panier_->reinitialiserClient();
+    if (panier_==nullptr) {
+        return ;
+    }
+    panier_->reinitialiserClient();
 }
 
 Produit* Client::trouverProduitPlusCher() const

@@ -38,12 +38,16 @@ void Fournisseur::reinitialiser()
 
 void Fournisseur::ajouterProduit(Produit *produit)
 {
+    Fournisseur *fournisseur = produit->obtenirFournisseur();
+    if (fournisseur != nullptr && fournisseur != this)
+        fournisseur->enleverProduit(produit);
     catalogue_->ajouter(produit);
 }
 
 void Fournisseur::enleverProduit(Produit *produit)
 {
-    catalogue_->supprimer(produit);
+    produit->modifierFournisseur(nullptr);
+    catalogue_->supprimer(produit); 
 }
 
 Produit* Fournisseur::trouverProduitPlusCher() const
@@ -54,6 +58,6 @@ Produit* Fournisseur::trouverProduitPlusCher() const
 void Fournisseur::diminuerPrix(int pourcent) const
 {
     FoncteurDiminuerPourcent foncteur(pourcent);
-    catalogue_->pourChaqueElement(foncteur);
+    catalogue_->pourChaqueElement(foncteur); //ajuster a STL
 }
 

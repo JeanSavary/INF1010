@@ -150,7 +150,8 @@ public:
         auto it= find_if(multimap_.begin(),multimap_.end(),foncteur);
         
         if(it != multimap_.end()){
-            multimap_.erase(multimap_.find(produit->obtenirPrix()));
+            
+            multimap_.erase(it);
         }
         
         return multimap_;

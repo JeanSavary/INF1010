@@ -13,12 +13,13 @@ GestionnaireProduits::GestionnaireProduits()
 void GestionnaireProduits::reinitialiserClient()
 {
     for (multimap<int,Produit*>::iterator it= conteneur_.begin() ; it !=conteneur_.end(); it++) {
-        ProduitAuxEncheres *produit = dynamic_cast<ProduitAuxEncheres *>(it->second);
+        
+        ProduitAuxEncheres* produit = dynamic_cast<ProduitAuxEncheres *>(it->second);
         if (produit) {
             produit->modifierEncherisseur(nullptr);
             produit->modifierPrix(produit->obtenirPrixInitial());
-    }
-    conteneur_.clear();
+        }
+             conteneur_.clear();
     }
     
 }
