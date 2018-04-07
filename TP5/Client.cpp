@@ -61,6 +61,9 @@ void Client::ajouterProduit(Produit *produit)
 
 void Client::reinitialiser()
 {
+    if (panier_==nullptr) {
+        return ;
+    }
     panier_->reinitialiserClient();
 }
 

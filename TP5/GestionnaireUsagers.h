@@ -3,6 +3,8 @@
 * Date: 9 mars 2018
 * Auteur: Ryan Hardie
 *******************************************/
+#ifndef GESTIONNAIREUSAGER_H
+#define GESTIONNAIREUSAGER_H
 #pragma once
 
 #include "GestionnaireGenerique.h"
@@ -20,7 +22,6 @@ Les méthodes retrouvées de la classe Gestionnaire sont :
 - void reinitialiser();
 - void afficherProfils() const;
  */
-using namespace std;
 
 class GestionnaireUsagers : public GestionnaireGenerique<Usager, set<Usager*>, FoncteurAjouterUsager, FoncteurSupprimerUsager>
 {
@@ -33,3 +34,5 @@ class GestionnaireUsagers : public GestionnaireGenerique<Usager, set<Usager*>, F
 private:
     
 };
+
+#endif

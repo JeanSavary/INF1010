@@ -28,10 +28,11 @@ void GestionnaireUsagers::encherir(Client *client, ProduitAuxEncheres *produit, 
 }
 void GestionnaireUsagers::reinitialiser()
 {
-    for (auto usager:conteneur_) {
-       usager->reinitialiser();
+    
+   for (set<Usager*>::iterator it = conteneur_.begin();it!=conteneur_.end();it++) {
+       (*it)->reinitialiser();
     }
-   
+
 }
 void GestionnaireUsagers::afficherLesProfils() const
 {
