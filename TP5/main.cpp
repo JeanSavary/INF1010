@@ -272,10 +272,7 @@ int main()
     
     // TEST 51 : obtenir un vector avec des produit qui ont des prix comprix entre 200 et 2000
     vector<pair<int, Produit*>> intervalleProduit = julie.obtenirPanier()->obtenirProduitsEntre(20, 2000);
-    /*for (int i = 0; i < intervalleProduit.size(); i++) {
-     cout << "asdfljshfgkjsh" << endl;
-     intervalleProduit[i].second->afficher();
-     }*/
+    
     tests.push_back(intervalleProduit.size() == 2 &&
                     intervalleProduit[0].second->obtenirPrix() >= 20.0 &&
                     intervalleProduit[intervalleProduit.size() - 1].second->obtenirPrix() <= 2000.0);
@@ -286,13 +283,13 @@ int main()
                     julie.obtenirPanier()->obtenirProduitSuivant(&montre) == &nem);
     
     // fonctions d'affichage
-    gaspard.afficherPanier();
-    julie.afficherPanier();
-    ratus.afficherPanier();
-    martine.afficherCatalogue();
-    samuel.afficherCatalogue();
-    mina.afficherCatalogue();
-    poly.afficherLesProfils();
+//    gaspard.afficherPanier();
+//    julie.afficherPanier();
+//    ratus.afficherPanier();
+//    martine.afficherCatalogue();
+//    samuel.afficherCatalogue();
+//    mina.afficherCatalogue();
+//    poly.afficherLesProfils();
     
     cout << "TESTS" << endl;
     for (unsigned int i = 0; i < tests.size(); i++)

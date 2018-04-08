@@ -5,9 +5,6 @@
  *******************************************/
 
 #pragma once
-
-
-
 template <typename T, typename C, typename A, typename S>
 class GestionnaireGenerique {
     

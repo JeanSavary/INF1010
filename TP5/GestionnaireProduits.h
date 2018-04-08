@@ -14,19 +14,6 @@
 #include "Produit.h"
 #include <vector>
 
-// TODO : Creer la classe GestionnaireProduits
-
-// TODO : Methodes :
-/*
- - reinitialiserClient();
- - reinitialiserFournisseur();
- - afficher();
- - obtenirTotalAPayer();
- - obtenirTotalApayerPremium();
- - trouverProduitPlusCher();
- - obtenirProduitsEntre();
- - obtenirProduitSuivant();
- */
 class GestionnaireProduits: public GestionnaireGenerique<Produit, multimap<int, Produit* >, FoncteurAjouterProduit, FoncteurSupprimerProduit>
 {
 public:

@@ -12,23 +12,35 @@ GestionnaireProduits::GestionnaireProduits()
 
 void GestionnaireProduits::reinitialiserClient()
 {
-    for (multimap<int,Produit*>::iterator it= conteneur_.begin() ; it !=conteneur_.end(); it++) {
+    for (auto it= conteneur_.begin() ; it !=conteneur_.end(); it++)
+    {
         ProduitAuxEncheres* produit = dynamic_cast<ProduitAuxEncheres*>(it->second);
-        if (produit) {
+        if (produit)
+        {
             produit->modifierEncherisseur(nullptr);
             produit->modifierPrix(produit->obtenirPrixInitial());
         }
-             conteneur_.clear();
+    }
+    
+    if (conteneur_.size() > 0)
+    {
+        conteneur_.clear();
     }
     
 }
 
 void GestionnaireProduits::reinitialiserFournisseur()
 {
-    for (multimap<int,Produit*>::iterator it= conteneur_.begin() ; it !=conteneur_.end(); it++) {
+    for (auto it= conteneur_.begin() ; it !=conteneur_.end(); it++) 
+    {
         it->second->modifierFournisseur(nullptr);
-        }
+    }
+    
+    if (conteneur_.size() > 0)
+    {
         conteneur_.clear();
+    }
+
 }
 
 void GestionnaireProduits::afficher() const
@@ -45,12 +57,6 @@ double GestionnaireProduits::obtenirTotalAPayer() const
         montant+= pair.second->obtenirPrix();
     }
     return montant;
-    /*
-     double montant = 0;
-     for (unsigned int i = 0; i < panier_.size(); i++)
-     montant += panier_[i]->obtenirPrix();
-     return montant;
-     */
     
 }
 
