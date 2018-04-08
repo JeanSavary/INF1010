@@ -69,8 +69,11 @@ public:
     {}
     
     void operator() (pair<int,Produit*> pair){
-        if(typeid(pair.second) == typeid(ProduitSolde)) {}
-        else pair.second->modifierPrix(pair.second-> obtenirPrix()*((100-pourcentage_)/100.0));
+        if(typeid(pair.second) != typeid(ProduitSolde*)) {
+            pair.second->modifierPrix(pair.second-> Produit::obtenirPrix()*((100-pourcentage_)/100.0));
+            
+        }
+        //else pair.second->modifierPrix(pair.second-> Produit::obtenirPrix()*((100-pourcentage_)/100.0));
     }
     
 private:

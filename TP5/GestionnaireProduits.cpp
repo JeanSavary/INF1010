@@ -74,6 +74,10 @@ double GestionnaireProduits::obtenirTotalAPayerPremium() const
 Produit* GestionnaireProduits::trouverProduitPlusCher() const
 {
     using pairtype = pair<int, Produit*>;
+   
+    if (conteneur_.size()==0)
+        return nullptr;
+    
     auto max= max_element(
                           conteneur_.begin(),conteneur_.end(),[](const pairtype & p1,const pairtype & p2)
                           {
