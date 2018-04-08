@@ -3,18 +3,18 @@
 #include <iostream>
 
 Client::Client(unsigned int codeClient)
-    : Usager(),
-      codeClient_(codeClient), panier_(new GestionnaireProduits())
+: Usager(),
+codeClient_(codeClient), panier_(new GestionnaireProduits())
 {
-	
+    
 }
 
 Client::Client(const string &nom, const string &prenom, int identifiant,
                const string &codePostal, unsigned int codeClient)
-    : Usager(nom, prenom, identifiant, codePostal),
-      codeClient_(codeClient), panier_(new GestionnaireProduits())
+: Usager(nom, prenom, identifiant, codePostal),
+codeClient_(codeClient), panier_(new GestionnaireProduits())
 {
-
+    
 }
 
 unsigned int Client::obtenirCodeClient() const
@@ -34,14 +34,14 @@ double Client::obtenirTotalAPayer() const
 
 void Client::afficherPanier() const
 {
-	panier_->afficher();
+    panier_->afficher();
 }
 
 void Client::afficher() const
 {
     Usager::afficher();
     cout << "\t\tcode client:\t" << codeClient_ << endl
-         << "\t\tpanier:\t\t" << panier_->obtenirConteneur().size() << " elements" << endl;
+    << "\t\tpanier:\t\t" << panier_->obtenirConteneur().size() << " elements" << endl;
 }
 
 void Client::modifierCodeClient(unsigned int codeClient)
@@ -51,12 +51,12 @@ void Client::modifierCodeClient(unsigned int codeClient)
 
 void Client::enleverProduit(Produit *produit)
 {
-	panier_->supprimer(produit);
+    panier_->supprimer(produit);
 }
 
 void Client::ajouterProduit(Produit *produit)
 {
-	panier_->ajouter(produit);
+    panier_->ajouter(produit);
 }
 
 void Client::reinitialiser()
@@ -72,3 +72,4 @@ Produit* Client::trouverProduitPlusCher() const
     return panier_->trouverProduitPlusCher();
     
 }
+

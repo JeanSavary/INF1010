@@ -40,11 +40,11 @@ public:
     FoncteurGenerateurId(): id_(0)
     {}
     
-        
     
-   int operator()()
+    
+    int operator()()
     {
-       return id_++;
+        return id_++;
         
     }
     

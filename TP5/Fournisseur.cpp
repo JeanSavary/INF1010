@@ -47,12 +47,12 @@ void Fournisseur::ajouterProduit(Produit *produit)
 void Fournisseur::enleverProduit(Produit *produit)
 {
     produit->modifierFournisseur(nullptr);
-    catalogue_->supprimer(produit); 
+    catalogue_->supprimer(produit);
 }
 
 Produit* Fournisseur::trouverProduitPlusCher() const
 {
-   return catalogue_->trouverProduitPlusCher();
+    return catalogue_->trouverProduitPlusCher();
 }
 
 void Fournisseur::diminuerPrix(int pourcent) const

@@ -1,8 +1,8 @@
 /********************************************
-* Titre: Travail pratique #5 - GestionnaireUsagers.cpp
-* Date: 9 mars 2018
-* Auteur: Ryan Hardie
-*******************************************/
+ * Titre: Travail pratique #5 - GestionnaireUsagers.cpp
+ * Date: 9 mars 2018
+ * Auteur: Ryan Hardie
+ *******************************************/
 #include "GestionnaireGenerique.h"
 #include "GestionnaireUsagers.h"
 #include "Usager.h"
@@ -29,16 +29,17 @@ void GestionnaireUsagers::encherir(Client *client, ProduitAuxEncheres *produit, 
 void GestionnaireUsagers::reinitialiser()
 {
     
-   for (set<Usager*>::iterator it = conteneur_.begin();it!=conteneur_.end();it++) {
-       (*it)->reinitialiser();
+    for (set<Usager*>::iterator it = conteneur_.begin();it!=conteneur_.end();it++) {
+        (*it)->reinitialiser();
     }
-
+    
 }
 void GestionnaireUsagers::afficherLesProfils() const
 {
-   cout << "PROFILS" << endl;
+    cout << "PROFILS" << endl;
     for (Usager* usager:conteneur_) {
         usager->afficher();
     }
     cout << endl;
 }
+
