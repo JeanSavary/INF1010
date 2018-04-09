@@ -1,7 +1,7 @@
 /********************************************
  * Titre: Travail pratique #5 - GestionnaireGenerique.h
  * Date: 9 mars 2018
- * Auteur: Ryan Hardie
+ * Auteurs: SAVARY Jean, PAGE Nicolas
  *******************************************/
 
 #pragma once
@@ -10,7 +10,7 @@ class GestionnaireGenerique {
     
 public:
     /*
-     Cette fonction retourne le conteneur du gestionnaire
+     Cette fonction retourne le conteneur du gestionnaire :
      soit une multimap<int, Produit*> ou un set<Usager*>
      */
     C obtenirConteneur()
@@ -19,7 +19,7 @@ public:
     }
     
     /*
-     cette fonction ajoute un element au conteneur a l'aide d'un foncteur
+     Cette fonction ajoute un element au conteneur a l'aide d'un foncteur
      */
     void ajouter(T* element)
     {
@@ -37,7 +37,7 @@ public:
     }
     
     /*
-     cette fonction parcours chaque elements du conteneur et applique l'operation du foncteur en parametre
+     Cette fonction parcourt chaque element du conteneur et applique l'operation du foncteur en parametre
      */
     template <typename Predicate>
     void  pourChaqueElement(Predicate foncteur)

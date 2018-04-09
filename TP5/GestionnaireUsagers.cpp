@@ -1,7 +1,7 @@
 /********************************************
  * Titre: Travail pratique #5 - GestionnaireUsagers.cpp
  * Date: 9 mars 2018
- * Auteur: Ryan Hardie
+ * Auteurs: SAVARY Jean, PAGE Nicolas
  *******************************************/
 #include "GestionnaireGenerique.h"
 #include "GestionnaireUsagers.h"

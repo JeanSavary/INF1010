@@ -1,7 +1,7 @@
 /********************************************
  * Titre: Travail pratique #5 - Foncteur.h
  * Date: 9 mars 2018
- * Auteur: Ryan Hardie
+ * Auteurs: SAVARY Jean, PAGE Nicolas
  *******************************************/
 
 #pragma once

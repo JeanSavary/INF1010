@@ -1,7 +1,7 @@
 /********************************************
  * Titre: Travail pratique #5 - GestionnaireProduits.h
  * Date: 9 mars 2018
- * Auteur: Ryan Hardie
+ * Auteurs: SAVARY Jean, PAGE Nicolas
  *******************************************/
 #ifndef GESTIONNAIREGENERIQUE_H
 #define GESTIONNAIREGENERIQUE_H

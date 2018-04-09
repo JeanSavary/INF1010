@@ -1,7 +1,7 @@
 /********************************************
  * Titre: Travail pratique #5 - GestionnaireProduits.cpp
  * Date: 9 mars 2018
- * Auteur: Ryan Hardie
+ * Auteurs: SAVARY Jean, PAGE Nicolas
  *******************************************/
 
 #include "GestionnaireProduits.h"
@@ -18,9 +18,7 @@ GestionnaireProduits::~GestionnaireProduits()
         conteneur_.clear();
     }
 }
-/*
- 
- */
+
 void GestionnaireProduits::reinitialiserClient()
 {
     for (auto it= conteneur_.begin() ; it !=conteneur_.end(); it++)
@@ -103,7 +101,9 @@ Produit* GestionnaireProduits::trouverProduitPlusCher() const
     return max->second;
 }
 
-/*obtenirProduitsEntre(): prend deux paramètres de type double qui représenteront les bornes de l’intervalle. Cette méthode retourne un vector contenant les pairs pair<int, Produit*> dont les prix des Produits associés sont compris dans cet intervalle.*/
+/*obtenirProduitsEntre(): prend deux paramètres de type double qui représenteront les bornes de l’intervale. 
+Cette méthode retourne un vector contenant les paires pair<int, Produit*> dont les prix des produits associés 
+sont compris dans cet intervalle.*/
 
 vector<pair<int,Produit*>> GestionnaireProduits::obtenirProduitsEntre(double borneInf, double borneSup)
 {
@@ -113,7 +113,8 @@ vector<pair<int,Produit*>> GestionnaireProduits::obtenirProduitsEntre(double bor
 }
 
 /*
- obtenirProduitSuivant() : prend en paramètre un pointeur de Produits et retourne le pointeur de Produit ayant une référence strictement supérieur.
+ obtenirProduitSuivant() : prend en paramètre un pointeur de Produit et retourne le pointeur de Produit ayant 
+ une référence strictement supérieure.
  */
 
 Produit* GestionnaireProduits::obtenirProduitSuivant(Produit* produit)
