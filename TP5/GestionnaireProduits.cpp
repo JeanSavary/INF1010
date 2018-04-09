@@ -18,7 +18,9 @@ GestionnaireProduits::~GestionnaireProduits()
         conteneur_.clear();
     }
 }
-
+/*
+ 
+ */
 void GestionnaireProduits::reinitialiserClient()
 {
     for (auto it= conteneur_.begin() ; it !=conteneur_.end(); it++)
@@ -80,6 +82,11 @@ double GestionnaireProduits::obtenirTotalAPayerPremium() const
     
 }
 
+
+/*
+ trouverProduitPlusCher() : retourne le Produit ayant le prix le plus élevé dans la
+ multimap de produits. 
+ */
 Produit* GestionnaireProduits::trouverProduitPlusCher() const
 {
     using pairtype = pair<int, Produit*>;
@@ -96,6 +103,8 @@ Produit* GestionnaireProduits::trouverProduitPlusCher() const
     return max->second;
 }
 
+/*obtenirProduitsEntre(): prend deux paramètres de type double qui représenteront les bornes de l’intervalle. Cette méthode retourne un vector contenant les pairs pair<int, Produit*> dont les prix des Produits associés sont compris dans cet intervalle.*/
+
 vector<pair<int,Produit*>> GestionnaireProduits::obtenirProduitsEntre(double borneInf, double borneSup)
 {
     vector<pair<int, Produit*>> vecteur;
@@ -103,7 +112,9 @@ vector<pair<int,Produit*>> GestionnaireProduits::obtenirProduitsEntre(double bor
     return vecteur;
 }
 
-
+/*
+ obtenirProduitSuivant() : prend en paramètre un pointeur de Produits et retourne le pointeur de Produit ayant une référence strictement supérieur.
+ */
 
 Produit* GestionnaireProduits::obtenirProduitSuivant(Produit* produit)
 {
