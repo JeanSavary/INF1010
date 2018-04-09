@@ -264,12 +264,12 @@ int main()
                     ratus.trouverProduitPlusCher() == nullptr);
     
     // TEST 50 : diminuer le prix des produits doit mettre a jour tous les produits du fournisseur
+    
     samuel.diminuerPrix(10);
-    //cout << samuel.obtenirCatalogue()->obtenirConteneur().find(6)->second->obtenirPrix() << endl;
     tests.push_back(samuel.obtenirCatalogue()->obtenirConteneur().find(6)->second->obtenirPrix() == 63.0 &&
                     samuel.obtenirCatalogue()->obtenirConteneur().find(6)->second->Produit::obtenirPrix() == 90.0 &&
                     samuel.obtenirCatalogue()->obtenirConteneur().find(1)->second->obtenirPrix() == 36);
-    
+  
     // TEST 51 : obtenir un vector avec des produit qui ont des prix comprix entre 200 et 2000
     vector<pair<int, Produit*>> intervalleProduit = julie.obtenirPanier()->obtenirProduitsEntre(20, 2000);
     /*for (int i = 0; i < intervalleProduit.size(); i++) {

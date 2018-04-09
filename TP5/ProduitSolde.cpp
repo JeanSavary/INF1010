@@ -1,4 +1,5 @@
 #include "ProduitSolde.h"
+#include <cmath>
 
 ProduitSolde::ProduitSolde(int pourcentageRabais)
     : Produit(),
@@ -15,7 +16,10 @@ ProduitSolde::ProduitSolde(Fournisseur *fournisseur, const string &nom,
 
 double ProduitSolde::obtenirPrix() const
 {
-    return prix_ * ((100 - pourcentageRabais_) / 100.0);
+   
+    double prix= (prix_ * ((100 - pourcentageRabais_) / 100.0));
+    return round(prix);
+    
 }
 
 void ProduitSolde::afficher() const
