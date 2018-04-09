@@ -17,6 +17,11 @@ codeClient_(codeClient), panier_(new GestionnaireProduits())
     
 }
 
+Client::~Client()
+{
+    delete panier_;
+}
+
 unsigned int Client::obtenirCodeClient() const
 {
     return codeClient_;

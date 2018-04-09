@@ -13,7 +13,8 @@ class Produit
   public:
     Produit(Fournisseur *fournisseur = nullptr, const string &nom = "outil",
             int reference = 0, double prix = 0.0);
-
+    ~Produit();
+    
     string obtenirNom() const;
     int obtenirReference() const;
     virtual double obtenirPrix() const;

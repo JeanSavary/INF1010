@@ -12,27 +12,14 @@
 #include "Foncteur.h"
 #include "Client.h"
 #include "ProduitAuxEncheres.h"
-// TODO : Créer la classe GestionnaireUsager
-
-// TODO : La classe ressemble beaucoup à la classe Gestionnaire
-/*
-Les méthodes retrouvées de la classe Gestionnaire sont :
-- double obtenirChiffreAffaires() const;
-- void encherir(Client *client, ProduitAuxEncheres *produit, double montant) const;
-- void reinitialiser();
-- void afficherProfils() const;
- */
 
 class GestionnaireUsagers : public GestionnaireGenerique<Usager, set<Usager*>, FoncteurAjouterUsager, FoncteurSupprimerUsager>
 {
     public:
-    
         double obtenirChiffreAffaires() const;
         void encherir(Client *client, ProduitAuxEncheres *produit, double montant) const;
         void reinitialiser();
         void afficherLesProfils() const;
-private:
-    
 };
 
 #endif

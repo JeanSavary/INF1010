@@ -10,13 +10,20 @@
 #include "ProduitSolde.h"
 #include "Produit.h"
 #include "Usager.h"
-// TODO : Creer le FoncteurEgal
+
+/*
+ Attributs :
+ - t_;
+ Methodes :
+ - operator(); Vérifie si deux objets de type T sont égaux
+ */
 template<typename T>
 class FoncteurEgal{
 public:
     
     FoncteurEgal(T* t): t_(t)
-    {}
+    {
+    }
     
     bool operator()(pair<int,T*> pair){
         return (t_ == pair.second);
@@ -27,7 +34,6 @@ private:
     
 };
 
-// TODO : Creer le FoncteurGenerateurId
 /*
  Attributs :
  - id_;
@@ -38,24 +44,18 @@ private:
 class FoncteurGenerateurId{
 public:
     FoncteurGenerateurId(): id_(0)
-    {}
-    
-    
+    {
+    }
     
     int operator()()
     {
         return id_++;
-        
     }
-    
     
 private:
     int id_;
-    
 };
 
-
-// TODO : Creer le FoncteurDiminuerPourcent
 /*
  Attributs :
  - pourcentage_;
@@ -73,15 +73,12 @@ public:
             pair.second->modifierPrix(pair.second-> Produit::obtenirPrix()*((100-pourcentage_)/100.0));
             
         }
-        //else pair.second->modifierPrix(pair.second-> Produit::obtenirPrix()*((100-pourcentage_)/100.0));
     }
     
 private:
     int pourcentage_;
 };
 
-
-// TODO : Creer le FoncteurIntervalle
 /*
  Attributs :
  - borneInf_;
@@ -106,7 +103,6 @@ private:
     double borneSup_;
 };
 
-// TODO : Creer le Foncteur AjouterProduit
 /*
  Attributs :
  - &multimap_;
@@ -117,7 +113,6 @@ class FoncteurAjouterProduit{
 public:
     FoncteurAjouterProduit(multimap<int, Produit*>& multimap): multimap_(multimap)
     {
-        
     }
     
     multimap<int, Produit*>& operator() (Produit* produit){
@@ -132,8 +127,6 @@ private:
     
 };
 
-
-// TODO : Creer le Foncteur SupprimerProduit
 /*
  Attributs :
  - &multimap_;
@@ -166,7 +159,6 @@ private:
     
 };
 
-//TODO : Creer le Foncteur AjouterUsager
 /*
  Attributs :
  - &set;
@@ -190,7 +182,6 @@ private:
     
 };
 
-//TODO : Creer le Foncteur SupprimerUsager
 /*
  Attributs :
  - &set;

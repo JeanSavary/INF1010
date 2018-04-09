@@ -13,6 +13,14 @@ Produit::Produit(Fournisseur *fournisseur, const string &nom, int reference, dou
         fournisseur_->ajouterProduit(this);
 }
 
+Produit::~Produit()
+{
+    if (fournisseur_ != nullptr)
+    {
+        delete fournisseur_;
+    }
+}
+
 string Produit::obtenirNom() const
 {
     return nom_;

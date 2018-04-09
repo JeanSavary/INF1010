@@ -9,9 +9,11 @@ using namespace std;
 class Usager
 {
   public:
+    
     Usager(const string &nom = "Doe", const string &prenom = "John",
            int identifiant = 0, const string &codePostal = "A1A A1A");
-
+    ~Usager();
+    
     string obtenirNom() const;
     string obtenirPrenom() const;
     int obtenirReference() const;

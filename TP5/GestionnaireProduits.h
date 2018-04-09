@@ -18,7 +18,9 @@ class GestionnaireProduits: public GestionnaireGenerique<Produit, multimap<int, 
 {
 public:
     
-    GestionnaireProduits(); //initialisation du conteneur
+    GestionnaireProduits(); 
+    ~GestionnaireProduits();
+    
     void reinitialiserClient();
     void reinitialiserFournisseur();
     void afficher() const;

@@ -14,6 +14,10 @@ Fournisseur::Fournisseur(const string &nom, const string &prenom, int identifian
 {
     catalogue_= new GestionnaireProduits();
 }
+Fournisseur::~Fournisseur()
+{
+    delete catalogue_;
+}
 
 GestionnaireProduits* Fournisseur::obtenirCatalogue() const
 {

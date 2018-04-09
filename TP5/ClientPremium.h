@@ -19,7 +19,7 @@ public:
     void modifierJoursRestants(unsigned int joursRestants);
     
 private:
-    unsigned int joursRestants_; // avant la fin de l'abonnement
+    unsigned int joursRestants_; 
 };
 
 #endif

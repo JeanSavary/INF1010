@@ -10,6 +10,10 @@ Usager::Usager(const string &nom, const string &prenom, int identifiant,
 {
 }
 
+Usager::~Usager()
+{
+}
+
 string Usager::obtenirNom() const
 {
     return nom_;

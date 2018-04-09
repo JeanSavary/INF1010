@@ -8,7 +8,16 @@
 #include "ProduitAuxEncheres.h"
 
 GestionnaireProduits::GestionnaireProduits()
-{}
+{
+}
+
+GestionnaireProduits::~GestionnaireProduits()
+{
+    if (conteneur_.size() > 0)
+    {
+        conteneur_.clear();
+    }
+}
 
 void GestionnaireProduits::reinitialiserClient()
 {
