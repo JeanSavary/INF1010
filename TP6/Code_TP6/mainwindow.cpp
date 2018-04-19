@@ -417,21 +417,28 @@ void MainWindow::ajouterUsager() {
     //On trouve le bon type d'usager selon le bouton radio sélectionné
     QRadioButton* typeUsager = 0;
     list<QRadioButton*>::iterator end= boutonRadioTypeUsager.end();
-    for(auto it= boutonRadioTypeUsager,begin(); it != end() ; it++){
+    /*for(auto it= boutonRadioTypeUsager,begin(); it != end() ; it++){
         if((*it)->isChecked()){
             typeUsager=*it;
             break;
         }
+    }*/
+    for(auto it= boutonRadioTypeUsager.begin();it !=end;it++){
+        if((*it)->isChecked()){
+            typeUsager=*it;
+            break;
+        }
+
     }
     // On créé le bon type d'usager selon le cas
     //Vérification que tous les champs ont été complétés
-    if (typeUsager == 1 || typeUsager == 2) //Le client est un fournisseur ou un client simple
+   if (typeUsager == 1 || typeUsager == 2) //Le client est un fournisseur ou un client simple
     {
         try {
-            QString nom = editeurNom.text();
-            QString prenom = editeurPrenom.text();
-            QString identifiant = editeurIdentifiant.text();
-            QString codePostal = editeurCodePostal.text();
+            QString nom = editeurNom->text();
+            QString prenom = editeurPrenom->text();
+            QString identifiant = editeurIdentifiant->text();
+            QString codePostal = editeurCodePostal->text();
 
             if ( nom == "")
             {
@@ -463,11 +470,11 @@ void MainWindow::ajouterUsager() {
     {
         try {
 
-            QString nom = editeurNom.text();
-            QString prenom = editeurPrenom.text();
-            QString identifiant = editeurIdentifiant.text();
-            QString codePostal = editeurCodePostal.text();
-            QString joursRestants = editeurJoursRestants.text();
+            QString nom = editeurNom->text();
+            QString prenom = editeurPrenom->text();
+            QString identifiant = editeurIdentifiant->text();
+            QString codePostal = editeurCodePostal->text();
+            QString joursRestants = editeurJoursRestants->text();
 
             if ( nom == "")
             {
