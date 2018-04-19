@@ -414,14 +414,8 @@ void MainWindow::ajouterUsager() {
 
     Usager* nouvelUsager;
 
-    /*À Faire*/
-
-    //Utilisation d'un try throw catch pour faire un popup message si tous les champs ne sont pas remplis
-    /*...*/
-
     //On trouve le bon type d'usager selon le bouton radio sélectionné
-    /*...*/
-    QRadioButton* typeUsager =0;
+    QRadioButton* typeUsager = 0;
     list<QRadioButton*>::iterator end= boutonRadioTypeUsager.end();
     for(auto it= boutonRadioTypeUsager,begin(); it != end() ; it++){
         if((*it)->isChecked()){
@@ -430,16 +424,94 @@ void MainWindow::ajouterUsager() {
         }
     }
     // On créé le bon type d'usager selon le cas
-    /*...*/
-
     //Vérification que tous les champs ont été complétés
-    /*...*/
+    if (typeUsager == 1 || typeUsager == 2) //Le client est un fournisseur ou un client simple
+    {
+        try {
+            QString nom = editeurNom.text();
+            QString prenom = editeurPrenom.text();
+            QString identifiant = editeurIdentifiant.text();
+            QString codePostal = editeurCodePostal.text();
+
+            if ( nom == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ nom est invalide");
+            }
+            nouvelUsager->modifierNom(nom);
+    
+            if ( prenom == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ prénom est invalide");
+            }
+            nouvelUsager->modifierPrenom(prenom);
+
+            if ( identifiant == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ identifiant est invalide");
+            }
+            nouvelUsager->modifierIdentifiant(identifiant);
+
+            if ( codePostal == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ code postal est invalide");
+            }
+            nouvelUsager->modifierCodePostal(codePostal);
+        }
+    }
+
+    if (typeUsager == 0) //L'usager est de type clientPremium
+    {
+        try {
+
+            QString nom = editeurNom.text();
+            QString prenom = editeurPrenom.text();
+            QString identifiant = editeurIdentifiant.text();
+            QString codePostal = editeurCodePostal.text();
+            QString joursRestants = editeurJoursRestants.text();
+
+            if ( nom == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ nom est invalide");
+            }
+            nouvelUsager->modifierNom(nom);
+    
+            if ( prenom == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ prénom est invalide");
+            }
+            nouvelUsager->modifierPrenom(prenom);
+
+            if ( identifiant == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ identifiant est invalide");
+            }
+            nouvelUsager->modifierIdentifiant(identifiant);
+
+            if ( codePostal == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ code postal est invalide");
+            }
+            nouvelUsager->modifierCodePostal(codePostal);
+
+            if ( joursRestants == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ jour restants est invalide");
+            }
+            nouvelUsager->modifierJoursRestants(joursRestants);
+        }
+    }
+    catch (ExceptionArgumentInvalide& e)
+    {
+        QMessageBox messageBox;
+        messageBox.critical(0, "Erreur lors de l'ajout d'un usager !", e.what);
+        return;
+    }
 
     // On ajoute le nouvel usager créé au gestionnaire
-    /*...*/
-
+     gestionnaire_->ajouterUsager(nouvelUsager);
+     
     // Mais on le stocke aussi localement dans l'attribut ajoute_ pour pouvoir le supprimer plus tard
-    /*...*/
+    ajoute_.push_back(nouvelUsager);
 }
 
 //Mise à jour de la vue après l'ajout d'un usager
