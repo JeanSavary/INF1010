@@ -417,56 +417,16 @@ void MainWindow::ajouterUsager() {
     //On trouve le bon type d'usager selon le bouton radio sélectionné
     QRadioButton* typeUsager = 0;
     list<QRadioButton*>::iterator end= boutonRadioTypeUsager.end();
-    /*for(auto it= boutonRadioTypeUsager,begin(); it != end() ; it++){
-        if((*it)->isChecked()){
-            typeUsager=*it;
-            break;
-        }
-    }*/
     for(auto it= boutonRadioTypeUsager.begin();it !=end;it++){
         if((*it)->isChecked()){
             typeUsager=*it;
             break;
         }
-
     }
+
     // On créé le bon type d'usager selon le cas
     //Vérification que tous les champs ont été complétés
-   if (typeUsager == 1 || typeUsager == 2) //Le client est un fournisseur ou un client simple
-    {
-        try {
-            QString nom = editeurNom->text();
-            QString prenom = editeurPrenom->text();
-            QString identifiant = editeurIdentifiant->text();
-            QString codePostal = editeurCodePostal->text();
-
-            if ( nom == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ nom est invalide");
-            }
-            nouvelUsager->modifierNom(nom);
-    
-            if ( prenom == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ prénom est invalide");
-            }
-            nouvelUsager->modifierPrenom(prenom);
-
-            if ( identifiant == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ identifiant est invalide");
-            }
-            nouvelUsager->modifierIdentifiant(identifiant);
-
-            if ( codePostal == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ code postal est invalide");
-            }
-            nouvelUsager->modifierCodePostal(codePostal);
-        }
-    }
-
-    if (typeUsager == 0) //L'usager est de type clientPremium
+    if (typeUsager->text().endsWith("ClientPremium"))
     {
         try {
 
@@ -480,33 +440,69 @@ void MainWindow::ajouterUsager() {
             {
                 throw ExceptionArgumentInvalide( "Erreur : Le champ nom est invalide");
             }
-            nouvelUsager->modifierNom(nom);
+            nouvelUsager->modifierNom(nom.toStdString());
     
             if ( prenom == "")
             {
                 throw ExceptionArgumentInvalide( "Erreur : Le champ prénom est invalide");
             }
-            nouvelUsager->modifierPrenom(prenom);
+            nouvelUsager->modifierPrenom(prenom.toStdString());
 
             if ( identifiant == "")
             {
                 throw ExceptionArgumentInvalide( "Erreur : Le champ identifiant est invalide");
             }
-            nouvelUsager->modifierIdentifiant(identifiant);
+            nouvelUsager->modifierIdentifiant(identifiant.toInt());
 
             if ( codePostal == "")
             {
                 throw ExceptionArgumentInvalide( "Erreur : Le champ code postal est invalide");
             }
-            nouvelUsager->modifierCodePostal(codePostal);
+            nouvelUsager->modifierCodePostal(codePostal.toStdString());
 
             if ( joursRestants == "")
             {
                 throw ExceptionArgumentInvalide( "Erreur : Le champ jour restants est invalide");
             }
-            nouvelUsager->modifierJoursRestants(joursRestants);
+            nouvelUsager->modifierJoursRestants(joursRestants.toInt());
         }
     }
+
+    if (typeUsager.text().endsWith("Client") || typeUsager.text().endsWith("Fournisseur"))
+    {
+         try {
+
+            QString nom = editeurNom->text();
+            QString prenom = editeurPrenom->text();
+            QString identifiant = editeurIdentifiant->text();
+            QString codePostal = editeurCodePostal->text();
+
+            if ( nom == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ nom est invalide");
+            }
+            nouvelUsager->modifierNom(nom.toStdString());
+    
+            if ( prenom == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ prénom est invalide");
+            }
+            nouvelUsager->modifierPrenom(prenom.toStdString());
+
+            if ( identifiant == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ identifiant est invalide");
+            }
+            nouvelUsager->modifierIdentifiant(identifiant.toInt());
+
+            if ( codePostal == "")
+            {
+                throw ExceptionArgumentInvalide( "Erreur : Le champ code postal est invalide");
+            }
+            nouvelUsager->modifierCodePostal(codePostal.toStdString());
+        }
+    }
+
     catch (ExceptionArgumentInvalide& e)
     {
         QMessageBox messageBox;
