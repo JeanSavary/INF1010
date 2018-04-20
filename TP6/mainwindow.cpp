@@ -1,3 +1,9 @@
+/********************************************
+ * Titre: Travail pratique #6 - mainWindow.cpp
+ * Date: 19 avril 2018
+ * Auteur: Nicolas PAGE et Jean SAVARY
+ *******************************************/
+
 #include <QAction>
 #include <QMenu>
 #include <QMenuBar>
@@ -32,7 +38,12 @@ using namespace std;
 
 Q_DECLARE_METATYPE(Usager*)
 
-// Constructeur de la fenetre principale de l'application
+/****************************************************************************
+* Fonction:    MainWindow::MainWindow()
+* Description: constructeur par paramètres de la fenêtre principale
+* Paramètres:  Gestionnaire* gestionnaire, QWidget *parent
+* Retour:        aucun
+****************************************************************************/
 MainWindow::MainWindow(Gestionnaire* gestionnaire, QWidget *parent) :
     QMainWindow(parent)
 {
@@ -40,6 +51,12 @@ MainWindow::MainWindow(Gestionnaire* gestionnaire, QWidget *parent) :
     setup();
 }
 
+/****************************************************************************
+* Fonction:    MainWindow::~MainWindow()
+* Description: destructeur de la fenêtre principale, supprime les éléments (usagers) créés en local
+* Paramètres:  Gestionnaire* gestionnaire, QWidget *parent
+* Retour:        aucun
+****************************************************************************/
 MainWindow::~MainWindow() {
     while (!ajoute_.empty()) {
         delete ajoute_.back();
@@ -47,6 +64,10 @@ MainWindow::~MainWindow() {
     }
 }
 
+/****************************************************************************
+* Fonction:    MainWindow::set(..)
+* Description: ensemble de méthodes permettant de réaliser l'UI de notre application
+****************************************************************************/
 void MainWindow::setup() {
     indexCourantDuFiltre_ = 0;
     setMenu();
@@ -57,7 +78,8 @@ void MainWindow::setup() {
 
 void MainWindow::setConnections()
 {
-   /*À Faire*/
+   connect(gestionnaire_, SIGNAL(usagerAjoute(Usager*)), this, SLOT(usagerAEteAjoute(Usager*)));
+   connect(gestionnaire_, SIGNAL(usagerSupprime(Usager*)), this, SLOT(usagerAEteSupprime(Usager*)));
 }
 
 void MainWindow::setMenu() {
@@ -81,8 +103,13 @@ void MainWindow::setMenu() {
 void MainWindow::setUI() {
 
     // Le sélecteur pour filtrer ce que l'on souhaite dans la liste (QComboBox*)
-    /*À Faire*/
+
     QComboBox* showCombobox = new QComboBox(this);
+    showCombobox ->addItem("Tout Afficher"); //index 0
+    showCombobox ->addItem("Afficher Clients Reguliers"); //index 1
+    showCombobox ->addItem("Afficher Clients Premiums"); // index 2
+    showCombobox ->addItem("Afficher Fournisseurs"); //index 3
+    connect(showCombobox, SIGNAL(currentIndexChanged(int)),this, SLOT(filtrerListe(int)));
 
     // La liste des usagers
     listUsager = new QListWidget(this);
@@ -96,15 +123,18 @@ void MainWindow::setUI() {
     connect(boutonSupprimerTousLesUsagers, SIGNAL(clicked()), this, SLOT(supprimerTousLesUsagers()));
 
     // Le bouton pour remettre à zéro la vue et ajouter un nouvel employé
-    /*À Faire*/
+    QPushButton* boutonAjouterUsager = new QPushButton(this);
+    boutonAjouterUsager->setText("Ajout d'un usager");
+    connect(boutonAjouterUsager, SIGNAL(clicked()), this, SLOT(nettoyerVue()));
 
     // Le premier layout, pour la colonne de gauche, dans lequel on insère les
     // éléments que l'on veut dans l'ordre dans lequel on veut qu'ils apparaissent
     QVBoxLayout* listLayout = new QVBoxLayout;
     // à faire ajouter  le sélecteur
+    listLayout->addWidget(showCombobox);
     listLayout->addWidget(listUsager);
     listLayout->addWidget(boutonSupprimerTousLesUsagers);
-    // à faire ajouter le  nouveau usager
+    listLayout->addWidget(boutonAjouterUsager);
 
     // Champ pour le nom
     QLabel* nomLabel = new QLabel;
@@ -125,13 +155,37 @@ void MainWindow::setUI() {
     prenomLayout->addWidget(editeurPrenom);
 
     //Champ pour l'identifiant avec validateur int entre 0 et 100 000
-    /*À Faire*/
+    QLabel* idLabel = new QLabel;
+    idLabel->setText("Identifiant:");
+    editeurIdentifiant = new QLineEdit();
+
+    QValidator *validatorId = new QIntValidator(0,100000,this);
+    editeurIdentifiant-> setValidator(validatorId);
+
+    QHBoxLayout* idLayout = new QHBoxLayout;
+    idLayout->addWidget(idLabel);
+    idLayout->addWidget(editeurIdentifiant);
 
     // Champ pour le code postal
-    /*À Faire*/
+    QLabel* codePLabel = new QLabel;
+    codePLabel->setText("Code Postal:");
+    editeurCodePostal = new QLineEdit;
+
+    QHBoxLayout* codePLayout = new QHBoxLayout;
+    codePLayout->addWidget(codePLabel);
+    codePLayout->addWidget(editeurCodePostal);
 
     //Champ pour JoursRestant de ClientPremium avec validateur int entre 0 et 1000
-    /*À Faire*/
+    QLabel* joursLabel = new QLabel;
+    joursLabel->setText("Jours Restants:");
+    editeurJoursRestants = new QLineEdit;
+
+    QValidator *validatorJours = new QIntValidator(0,1000,this);
+    editeurJoursRestants->setValidator(validatorJours);
+
+    QHBoxLayout* joursLayout = new QHBoxLayout;
+    joursLayout->addWidget(joursLabel);
+    joursLayout->addWidget(editeurJoursRestants);
 
     // Boutons radio
     QRadioButton* clientPremiumBoutonRadio = new QRadioButton("&ClientPremium", this);
@@ -161,7 +215,11 @@ void MainWindow::setUI() {
     horizontalFrameLine->setFrameShape(QFrame::HLine);
 
     // Bouton pour supprimer l'usager sélectionné dans la liste
-    /*À Faire*/
+
+    boutonSupprimer = new QPushButton(this);
+    boutonSupprimer->setText("Supprimer");
+    connect(boutonSupprimer, SIGNAL(clicked()),
+            this, SLOT(supprimerUsagerSelectionne()));
 
     // Bouton pour ajouter l'usager dont on
     // vient d'entrer les informations
@@ -173,13 +231,17 @@ void MainWindow::setUI() {
     // Organisation horizontale des boutons
     QHBoxLayout* ajouterSupprimerLayout = new QHBoxLayout;
     ajouterSupprimerLayout->addWidget(boutonAjouter);
-    // À faire ajouter le bouton supprimé
+    ajouterSupprimerLayout->addWidget(boutonSupprimer);
+
 
     // Organisation pour la colonne de droite
     // ajouter les 3 champs: identifiant, code postal, joursRestants
     QVBoxLayout* displayLayout = new QVBoxLayout;
     displayLayout->addLayout(nomLayout);
     displayLayout->addLayout(prenomLayout);
+    displayLayout->addLayout(idLayout);
+    displayLayout->addLayout(codePLayout);
+    displayLayout->addLayout(joursLayout);
     displayLayout->addLayout(typeUsagerLayout);
     displayLayout->addWidget(horizontalFrameLine);
     displayLayout->addLayout(ajouterSupprimerLayout);
@@ -208,12 +270,24 @@ void MainWindow::setUI() {
     setWindowTitle(title.c_str());
 }
 
-//Cette fonction crée une boite de message de type popup
+/****************************************************************************
+* Fonction:    MainWindow::afficherMessage()
+* Description: crée une fenêtre de type popUp
+* Paramètres:  QString msg
+* Retour:      aucun
+****************************************************************************/
 void MainWindow::afficherMessage(QString msg) {
-    /*À Faire*/
+    QMessageBox msgBox;
+    msgBox.setText(msg);
+    msgBox.exec();
 }
 
-//Charger tous les usagers connus
+/****************************************************************************
+* Fonction:    MainWindow::chargerUsagers()
+* Description: permet de charger tous les usagers connus
+* Paramètres:  aucun
+* Retour:      aucun
+****************************************************************************/
 void MainWindow::chargerUsagers() {
     // On s'assure que la liste est vide
     listUsager->clear();
@@ -234,7 +308,12 @@ void MainWindow::chargerUsagers() {
     }
 }
 
-//Fonction qui retourne un boolean sur le type de filtre choisi
+/****************************************************************************
+* Fonction:    MainWindow::filtrerMasque()
+* Description: retourne un booléen en fonction du type d'usager choisi
+* Paramètres:  Usager* usager
+* Retour:      bool
+****************************************************************************/
 bool MainWindow::filtrerMasque(Usager* usager) {
     switch (indexCourantDuFiltre_) {
     case 1:
@@ -249,23 +328,48 @@ bool MainWindow::filtrerMasque(Usager* usager) {
     }
 }
 
-//Fonction qui affiche les usagers d'un certain type selon l'index donné en paramètre
-//Il s'agit des champs du dropdown menu ( Tous les usagers = 0 , Tous les clients reguliers = 1, tous les fournisseurs = 2...)
+/****************************************************************************
+* Fonction:    MainWindow::filtrerListe()
+* Description: affiche les usagers d'un certain type selon l'index en paramètre
+* Paramètres:  int index
+* Retour:      aucun
+****************************************************************************/
 void MainWindow::filtrerListe(int index) {
-    /*À Faire*/
+     indexCourantDuFiltre_ = index;
+     for (int i= 0 ; i<listUsager->count();++i ) {
+     QListWidgetItem *item = listUsager->item(i);
+     Usager* usager = item->data(Qt::UserRole).value<Usager*>();
+     item->setHidden(filtrerMasque(usager));
+     }
 }
 
-//Fonction qui affiche les informations de l'usager sélectionné à partir de la liste.
-//Ses informations sont affichées dans les boîtes de texte du panneau de droite.
-//Les champs sont disabled à l'utilisateur pour éviter qu'il ne modifie l'objet
+/****************************************************************************
+* Fonction:    MainWindow::selectionnerUsager()
+* Description: affiche les informations de l'usager sélectionné dans la liste (widget)
+* Paramètres:  QListWidgetItem* item
+* Retour:      aucun
+****************************************************************************/
 void MainWindow::selectionnerUsager(QListWidgetItem* item) {
     Usager* usager = item->data(Qt::UserRole).value<Usager*>();
 
     //Tous les champs sont mis à disabled et affiche l'information de l'usager sélectionné
-    /*À Faire*/
-
+    editeurNom->setDisabled(true);
+    editeurNom->setText(QString::fromStdString(usager->obtenirNom()));
+    editeurPrenom->setDisabled(true);
+    editeurPrenom->setText(QString::fromStdString(usager->obtenirPrenom()));
+    editeurIdentifiant->setDisabled(true);
+    editeurIdentifiant->setText(QString::number(usager->obtenirIdentifiant()));
+    editeurCodePostal->setDisabled(true);
+    editeurCodePostal->setText(QString::fromStdString(usager->obtenirCodePostal()));
     //Affiche les jours restants s'il s'agit d'un ClientPremium, sinon on affiche "-"
     /*À Faire*/
+    editeurJoursRestants->setDisabled(true);
+    if(typeid(*usager)==typeid(ClientPremium)){
+        ClientPremium *clientPrem = dynamic_cast<ClientPremium *>(usager);
+        editeurJoursRestants->setText(QString::number(clientPrem->obtenirJoursRestants()));
+        }// faire cast
+    else editeurJoursRestants->setText("-");
+
 
     //On met a checked le type d'usager qui est sélectionné
     list<QRadioButton*>::iterator end = boutonRadioTypeUsager.end();
@@ -286,7 +390,12 @@ void MainWindow::selectionnerUsager(QListWidgetItem* item) {
     boutonSupprimer->setDisabled(false);
 }
 
-//On remet à neuf la vue tel qu'on puisse y ajouter un nouvel usager
+/****************************************************************************
+* Fonction:    MainWindow::nettoyerVue()
+* Description: réinitialise la vue avant d'ajouter un nouvel usager
+* Paramètres:  aucun
+* Retour:      aucun
+****************************************************************************/
 void MainWindow::nettoyerVue() {
     editeurNom->setDisabled(false);
     editeurNom->setText("");
@@ -318,7 +427,12 @@ void MainWindow::nettoyerVue() {
     editeurNom->setFocus();
 }
 
-//Le champ JoursRestants est activé seulement s'il s'agit d'un ClientPremium
+/****************************************************************************
+* Fonction:    MainWindow::changerTypeUsager()
+* Description: active le champ 'Jour restants' en fonction du type d'usager (activé seulement pour les clients premium)
+* Paramètres:  aucun
+* Retour:      aucun
+****************************************************************************/
 void MainWindow::changerTypeUsager(int index) {
     if (index == -2) {
         editeurJoursRestants->setDisabled(false);
@@ -327,48 +441,145 @@ void MainWindow::changerTypeUsager(int index) {
     }
 }
 
-//Supprimer tous les usagers de la liste
+/****************************************************************************
+* Fonction:    MainWindow::supprimerTousLesUsagers()
+* Description: supprime tous les usagers de la liste
+* Paramètres:  aucun
+* Retour:      aucun
+****************************************************************************/
 void MainWindow::supprimerTousLesUsagers() {
-    /*À Faire*/
+    vector<Usager*> supprimer; //creation d'un vecteur ou on mettra les usagers a supprimer
+    for (int i=0;i<listUsager->count();++i){
+    QListWidgetItem *item = listUsager-> item(i);
+    supprimer.push_back(item->data(Qt::UserRole).value<Usager*>());
+    }
+    for (Usager* usager:supprimer){
+        gestionnaire_->supprimerUsager(usager);
+    }
 }
 
-//Supprime l'usager sélectionné dans la liste
+/****************************************************************************
+* Fonction:    MainWindow::supprimerUsagerSelectionne()
+* Description: supprime l'usager selectionné
+* Paramètres:  aucun
+* Retour:      aucun
+****************************************************************************/
 void MainWindow::supprimerUsagerSelectionne() {
-    /*À Faire*/
+    vector<Usager*> supprimer;
+    for(QListWidgetItem *item : listUsager->selectedItems()){
+        supprimer.push_back(item->data(Qt::UserRole).value<Usager*>());
+    }
+    for (Usager* usager:supprimer){
+        gestionnaire_->supprimerUsager(usager);
+    }
 }
 
-//Ajoute un nouvel usager dans la liste
+/****************************************************************************
+* Fonction:    MainWindow::ajouterUsager()
+* Description: ajoute un nouvel usager dans la liste
+* Paramètres:  aucun
+* Retour:      aucun
+****************************************************************************/
 void MainWindow::ajouterUsager() {
 
     Usager* nouvelUsager;
 
-    /*À Faire*/
-
-    //Utilisation d'un try throw catch pour faire un popup message si tous les champs ne sont pas remplis
-    /*...*/
-
     //On trouve le bon type d'usager selon le bouton radio sélectionné
-    /*...*/
+    QRadioButton* typeUsager = 0;
+    list<QRadioButton*>::iterator end= boutonRadioTypeUsager.end();
+    for(auto it= boutonRadioTypeUsager.begin();it !=end;it++){
+        if((*it)->isChecked()){
+            typeUsager=*it;
+            break;
+        }
+    }
 
     // On créé le bon type d'usager selon le cas
-    /*...*/
-
     //Vérification que tous les champs ont été complétés
-    /*...*/
+
+     try {
+
+            if ( editeurNom->text().isEmpty())
+            {
+                throw ExceptionArgumentInvalide( QString::fromStdString("Erreur : Le champ nom est invalide"));
+            }
+    
+            if ( editeurPrenom->text().isEmpty())
+            {
+                throw ExceptionArgumentInvalide(QString::fromStdString( "Erreur : Le champ prénom est invalide"));
+            }
+
+            if ( editeurIdentifiant->text().isEmpty())
+            {
+                throw ExceptionArgumentInvalide( QString::fromStdString("Erreur : Le champ identifiant est invalide"));
+            }
+
+            if (editeurCodePostal->text().isEmpty())
+            {
+                throw ExceptionArgumentInvalide(QString::fromStdString( "Erreur : Le champ code postal est invalide"));
+            }
+
+            if ( editeurJoursRestants->text().isEmpty() && typeUsager->text().endsWith("ClientPremium"))
+            {
+                throw ExceptionArgumentInvalide( QString::fromStdString("Erreur : Le champ jour restants est invalide"));
+            }
+        }
+        catch (ExceptionArgumentInvalide& e)
+        {
+            afficherMessage(e.what());
+            return;
+        }
+
+
+    if (typeUsager->text().endsWith("ClientPremium"))
+    {
+        nouvelUsager= new ClientPremium(editeurNom->text().toStdString(),
+                                        editeurPrenom->text().toStdString(),
+                                        editeurIdentifiant->text().toInt(),
+                                        editeurCodePostal->text().toStdString(),
+                                        editeurJoursRestants->text().toDouble());
+    }
+    else if(typeUsager->text().endsWith("Client") )
+    {
+        nouvelUsager = new Client(editeurNom->text().toStdString(),
+                                  editeurPrenom->text().toStdString(),
+                                  editeurIdentifiant->text().toInt(),
+                                  editeurCodePostal->text().toStdString());
+    }
+    else
+    {
+        nouvelUsager=new Fournisseur(editeurNom->text().toStdString(),
+                                     editeurPrenom->text().toStdString(),
+                                     editeurIdentifiant->text().toInt(),
+                                     editeurCodePostal->text().toStdString());
+    }
 
     // On ajoute le nouvel usager créé au gestionnaire
-    /*...*/
-
+     gestionnaire_->ajouterUsager(nouvelUsager);
+     
     // Mais on le stocke aussi localement dans l'attribut ajoute_ pour pouvoir le supprimer plus tard
-    /*...*/
+    ajoute_.push_back(nouvelUsager);
 }
 
-//Mise à jour de la vue après l'ajout d'un usager
+/****************************************************************************
+* Fonction:    MainWindow::usagerAEteAjoute()
+* Description: mets à jour la vue après avoir ajouté un nouvel usager
+* Paramètres:  Usager* u
+* Retour:      aucun
+****************************************************************************/
 void MainWindow::usagerAEteAjoute(Usager* u) {
-    /*À Faire*/
+    QListWidgetItem* item = new QListWidgetItem(
+    QString::fromStdString(u->obtenirNom()) + ", " + QString::fromStdString(u->obtenirPrenom()), listUsager);
+    item->setData(Qt::UserRole, QVariant::fromValue<Usager*>(u));
+    item->setHidden(filtrerMasque(u));
 }
 
-//Mise à jour de la vue après la suppression d'un usager
+/****************************************************************************
+* Fonction:    MainWindow::usagerAEteSupprime()
+* Description: mise à jour de la vue après avoir supprimé un usager
+* Paramètres:  Usager* u
+* Retour:      aucun
+****************************************************************************/
 void MainWindow::usagerAEteSupprime(Usager* u) {
     // On cherche dans notre QlistWidget l'usager pour lequel le
     // signal a été envoyé, afin de l'en retirer

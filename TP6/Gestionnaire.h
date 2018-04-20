@@ -1,3 +1,9 @@
+/********************************************
+ * Titre: Travail pratique #6 - mainWindow.h
+ * Date: 19 avril 2018
+ * Auteur: Nicolas PAGE et Jean SAVARY
+ *******************************************/
+
 #ifndef GESTIONNAIRE_H
 #define GESTIONNAIRE_H
 
@@ -18,12 +24,11 @@ class Gestionnaire: public QObject
     int obtenirNombreUsager() const;
     Usager* obtenirUsager(int index);
 
-    /*À Implementer*/
     void ajouterUsager(Usager* usager);
-    /*À Implementer*/
     void supprimerUsager(Usager* usager);
 
-signals:
+  //Définition des signaux 
+  signals:
     void usagerAjoute(Usager* usager);
     void usagerSupprime(Usager* usager);
 

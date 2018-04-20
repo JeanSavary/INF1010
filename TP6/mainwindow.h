@@ -1,3 +1,9 @@
+/********************************************
+ * Titre: Travail pratique #6 - mainWindow.h
+ * Date: 19 avril 2018
+ * Auteur: Nicolas PAGE et Jean SAVARY
+ *******************************************/
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
