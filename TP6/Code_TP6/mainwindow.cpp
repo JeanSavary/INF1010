@@ -138,8 +138,8 @@ void MainWindow::setUI() {
     idLabel->setText("Identifiant:");
     editeurIdentifiant = new QLineEdit();
 
-    //Qvalidator *validator = new setValidator(0,100000,this);
-    //editeurIdentifiant-> setValidator(new QRegExpValidator(0,99999));
+    QValidator *validatorId = new QIntValidator(0,100000,this);
+    editeurIdentifiant-> setValidator(validatorId);
 
     QHBoxLayout* idLayout = new QHBoxLayout;
     idLayout->addWidget(idLabel);
@@ -159,7 +159,8 @@ void MainWindow::setUI() {
     joursLabel->setText("Jours Restants:");
     editeurJoursRestants = new QLineEdit;
 
-    //QValidator *validator = new setValidator(0,1000,this);
+    QValidator *validatorJours = new QIntValidator(0,1000,this);
+    editeurJoursRestants->setValidator(validatorJours);
 
     QHBoxLayout* joursLayout = new QHBoxLayout;
     joursLayout->addWidget(joursLabel);
@@ -252,6 +253,7 @@ void MainWindow::setUI() {
 void MainWindow::afficherMessage(QString msg) {
     QMessageBox msgBox;
     msgBox.setText(msg);
+    msgBox.exec();
 }
 
 //Charger tous les usagers connus
@@ -424,91 +426,69 @@ void MainWindow::ajouterUsager() {
         }
     }
 
+
+
+
     // On créé le bon type d'usager selon le cas
     //Vérification que tous les champs ont été complétés
+
+     try {
+
+            if ( editeurNom->text().isEmpty())
+            {
+                throw ExceptionArgumentInvalide( QString::fromStdString("Erreur : Le champ nom est invalide"));
+            }
+    
+            if ( editeurPrenom->text().isEmpty())
+            {
+                throw ExceptionArgumentInvalide(QString::fromStdString( "Erreur : Le champ prénom est invalide"));
+            }
+
+            if ( editeurIdentifiant->text().isEmpty())
+            {
+                throw ExceptionArgumentInvalide( QString::fromStdString("Erreur : Le champ identifiant est invalide"));
+            }
+
+            if (editeurCodePostal->text().isEmpty())
+            {
+                throw ExceptionArgumentInvalide(QString::fromStdString( "Erreur : Le champ code postal est invalide"));
+            }
+
+            if ( editeurJoursRestants->text().isEmpty() && typeUsager->text().endsWith("ClientPremium"))
+            {
+                throw ExceptionArgumentInvalide( QString::fromStdString("Erreur : Le champ jour restants est invalide"));
+            }
+        }
+        catch (ExceptionArgumentInvalide& e)
+        {
+           afficherMessage(e.what());
+            return;
+        }
+
+
     if (typeUsager->text().endsWith("ClientPremium"))
     {
-        try {
-
-            QString nom = editeurNom->text();
-            QString prenom = editeurPrenom->text();
-            QString identifiant = editeurIdentifiant->text();
-            QString codePostal = editeurCodePostal->text();
-            QString joursRestants = editeurJoursRestants->text();
-
-            if ( nom == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ nom est invalide");
-            }
-            nouvelUsager->modifierNom(nom.toStdString());
-    
-            if ( prenom == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ prénom est invalide");
-            }
-            nouvelUsager->modifierPrenom(prenom.toStdString());
-
-            if ( identifiant == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ identifiant est invalide");
-            }
-            nouvelUsager->modifierIdentifiant(identifiant.toInt());
-
-            if ( codePostal == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ code postal est invalide");
-            }
-            nouvelUsager->modifierCodePostal(codePostal.toStdString());
-
-            if ( joursRestants == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ jour restants est invalide");
-            }
-            nouvelUsager->modifierJoursRestants(joursRestants.toInt());
-        }
+        nouvelUsager= new ClientPremium(editeurNom->text().toStdString(),
+                                        editeurPrenom->text().toStdString(),
+                                        editeurIdentifiant->text().toDouble(),
+                                        editeurCodePostal->text().toStdString(),
+                                        editeurJoursRestants->text().toDouble());
     }
-
-    if (typeUsager.text().endsWith("Client") || typeUsager.text().endsWith("Fournisseur"))
+     else if(typeUsager->text().endsWith("Client") )
     {
-         try {
-
-            QString nom = editeurNom->text();
-            QString prenom = editeurPrenom->text();
-            QString identifiant = editeurIdentifiant->text();
-            QString codePostal = editeurCodePostal->text();
-
-            if ( nom == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ nom est invalide");
-            }
-            nouvelUsager->modifierNom(nom.toStdString());
-    
-            if ( prenom == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ prénom est invalide");
-            }
-            nouvelUsager->modifierPrenom(prenom.toStdString());
-
-            if ( identifiant == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ identifiant est invalide");
-            }
-            nouvelUsager->modifierIdentifiant(identifiant.toInt());
-
-            if ( codePostal == "")
-            {
-                throw ExceptionArgumentInvalide( "Erreur : Le champ code postal est invalide");
-            }
-            nouvelUsager->modifierCodePostal(codePostal.toStdString());
-        }
+        nouvelUsager = new Client(editeurNom->text().toStdString(),
+                                  editeurPrenom->text().toStdString(),
+                                  editeurIdentifiant->text().toDouble(),
+                                  editeurCodePostal->text().toStdString());
     }
-
-    catch (ExceptionArgumentInvalide& e)
+     else
     {
-        QMessageBox messageBox;
-        messageBox.critical(0, "Erreur lors de l'ajout d'un usager !", e.what);
-        return;
+        nouvelUsager=new Fournisseur(editeurNom->text().toStdString(),
+                                     editeurPrenom->text().toStdString(),
+                                     editeurIdentifiant->text().toDouble(),
+                                     editeurCodePostal->text().toStdString());
     }
+
 
     // On ajoute le nouvel usager créé au gestionnaire
      gestionnaire_->ajouterUsager(nouvelUsager);
